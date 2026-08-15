@@ -23,3 +23,10 @@
  GET / 200 in 67ms (next.js: 37ms, application-code: 30ms)
  GET /api/gacha?url=https%3A%2F%2Fpublic-operation-hk4e-sg.hoyoverse.com%2Fgacha_info%2Fapi%2FgetGachaLog%3Fauthkey%3Dx%26gacha_type%3D301%26size%3D5 200 in 2.5s (next.js: 2.0s, application-code: 461ms)
  GET /api/gacha?url=https%3A%2F%2Fevil.example.com%2Fx 400 in 12ms (next.js: 4ms, application-code: 7ms)
+ GET / 200 in 88ms (next.js: 7ms, application-code: 81ms)
+✓ Compiled in 64ms
+ GET / 200 in 62ms (next.js: 26ms, application-code: 37ms)
+✓ Compiled in 275ms
+ GET / 200 in 127ms (next.js: 80ms, application-code: 48ms)
+✓ Compiled in 985ms
+ GET / 200 in 73ms (next.js: 27ms, application-code: 46ms)

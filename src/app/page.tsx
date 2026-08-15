@@ -127,6 +127,11 @@ export default function Home() {
               pity4={pity4}
               pity5={pity5}
               outcome={outcome}
+              total={
+                controller.wishes.filter(
+                  (wish) => wish.bannerType === selectedBanner
+                ).length
+              }
             />
 
             <PityCircleGrid

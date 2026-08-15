@@ -13,8 +13,12 @@ export interface ImportPanelProps {
   onImported: (wishes: Wish[]) => Promise<void>;
 }
 
+const COPY_SCRIPT =
+  "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex \"&{$((New-Object System.Net.WebClient).DownloadString('https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235/raw/getlink.ps1'))} global\"";
+
 export function ImportPanel({ existingIds, onImported }: ImportPanelProps) {
   const [url, setUrl] = useState("");
+  const [copied, setCopied] = useState(false);
   const [importing, setImporting] = useState(false);
   const [progress, setProgress] = useState<ImportProgress | null>(null);
   const [result, setResult] = useState<ImportResult | null>(null);
@@ -44,6 +48,14 @@ export function ImportPanel({ existingIds, onImported }: ImportPanelProps) {
     }
   }
 
+  function handleCopyScript() {
+    navigator.clipboard.writeText(COPY_SCRIPT);
+    setCopied(true);
+    window.setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  }
+
   return (
     <section
       aria-label="Import wish history"
@@ -57,14 +69,10 @@ export function ImportPanel({ existingIds, onImported }: ImportPanelProps) {
       <div className="mb-3">
         <button
           type="button"
-          onClick={() => {
-            navigator.clipboard.writeText(
-              "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex \"&{$((New-Object System.Net.WebClient).DownloadString('https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235/raw/getlink.ps1'))} global\""
-            );
-          }}
+          onClick={handleCopyScript}
           className="rounded-md border border-zinc-700 bg-zinc-900/50 px-3 py-1.5 text-xs font-medium text-zinc-300 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
         >
-          Copy script
+          {copied ? "Copied" : "Copy script"}
         </button>
       </div>
       <div className="flex flex-col gap-2 sm:flex-row">

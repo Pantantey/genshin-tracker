@@ -222,6 +222,10 @@ async function importBanner(
  * Fetch one page, retrying transient failures (network, HTTP 429, HTTP 5xx).
  * Non-zero HoYoVerse retcodes (e.g. expired authkey) are returned as-is so the
  * caller can report a clear warning instead of silently retrying forever.
+ *
+ * Requests go through the same-origin `/api/gacha` proxy to avoid CORS: the
+ * HoYoVerse endpoint does not send `Access-Control-Allow-Origin`, which blocks
+ * direct browser fetches when the app is served from a remote origin.
  */
 async function fetchGachaLog(url: string): Promise<GachaLogResponse> {
   let lastError: unknown;
@@ -230,7 +234,9 @@ async function fetchGachaLog(url: string): Promise<GachaLogResponse> {
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt += 1) {
     let response: Response;
     try {
-      response = await fetch(url, { headers: { Accept: "application/json" } });
+      response = await fetch(`/api/gacha?url=${encodeURIComponent(url)}`, {
+        headers: { Accept: "application/json" },
+      });
     } catch (caught) {
       lastError = caught;
       await wait(attempt);

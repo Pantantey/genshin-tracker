@@ -1,0 +1,25 @@
+
+> genshin-wish-tracker@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.1 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://26.215.98.241:3000
+✓ Ready in 1029ms
+✓ Running next.config.ts took 101ms
+
+ GET / 200 in 388ms (next.js: 239ms, application-code: 149ms)
+ GET / 200 in 37ms (next.js: 4ms, application-code: 33ms)
+ GET / 200 in 30ms (next.js: 5ms, application-code: 25ms)
+ GET / 200 in 753ms (next.js: 697ms, application-code: 56ms)
+ GET / 200 in 41ms (next.js: 8ms, application-code: 33ms)
+ GET / 200 in 97ms (next.js: 32ms, application-code: 65ms)
+ GET / 200 in 62ms (next.js: 8ms, application-code: 55ms)
+ GET / 200 in 27ms (next.js: 4ms, application-code: 23ms)
+ GET / 200 in 106ms (next.js: 8ms, application-code: 98ms)
+ GET / 200 in 75ms (next.js: 15ms, application-code: 60ms)
+ GET / 200 in 46ms (next.js: 14ms, application-code: 32ms)
+✓ Compiled in 499ms
+ GET / 200 in 67ms (next.js: 37ms, application-code: 30ms)
+ GET /api/gacha?url=https%3A%2F%2Fpublic-operation-hk4e-sg.hoyoverse.com%2Fgacha_info%2Fapi%2FgetGachaLog%3Fauthkey%3Dx%26gacha_type%3D301%26size%3D5 200 in 2.5s (next.js: 2.0s, application-code: 461ms)
+ GET /api/gacha?url=https%3A%2F%2Fevil.example.com%2Fx 400 in 12ms (next.js: 4ms, application-code: 7ms)

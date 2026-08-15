@@ -31,6 +31,7 @@ export function BannerTabs({ selected, onSelect, icons }: BannerTabsProps) {
             }`}
           >
             {icons?.[banner] && (
+              // eslint-disable-next-line @next/next/no-img-element -- hot-linked CDN images with an onError fallback
               <img
                 src={icons[banner]!}
                 alt=""

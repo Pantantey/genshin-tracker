@@ -14,10 +14,10 @@ import { WishRow } from "@/features/wish-history/components/wish-row";
 import { ImportPanel } from "@/features/import/components/import-panel";
 
 const BANNER_ICONS: Partial<Record<BannerType, string>> = {
-  character: "https://paimon.moe/images/characters/odette.png",
-  weapon: "https://paimon.moe/images/weapons/whitelake_frostfeather.png",
-  standard: "https://paimon.moe/images/characters/mona.png",
-  novice: "https://paimon.moe/images/characters/qiqi.png",
+  character: "/icons/characters/odette.png",
+  weapon: "/icons/weapons/whitelake_frostfeather.png",
+  standard: "/icons/characters/mona.png",
+  novice: "/icons/characters/qiqi.png",
 };
 
 export default function Home() {

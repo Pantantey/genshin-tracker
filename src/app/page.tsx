@@ -13,12 +13,6 @@ import { PityCircleGrid } from "@/features/wish-history/components/pity-circle-g
 import { WishRow } from "@/features/wish-history/components/wish-row";
 import { ImportPanel } from "@/features/import/components/import-panel";
 
-const BANNER_ICONS: Partial<Record<BannerType, string>> = {
-  character: "/icons/characters/odette.png",
-  weapon: "/icons/weapons/whitelake_frostfeather.png",
-  standard: "/icons/characters/mona.png",
-  novice: "/icons/characters/qiqi.png",
-};
 
 export default function Home() {
   const controller = useWishHistory(getWishRepository());
@@ -116,11 +110,12 @@ export default function Home() {
 
         {controller.status === "ready" && controller.wishes.length > 0 && (
           <>
+            <div>
             <BannerTabs
               selected={selectedBanner}
               onSelect={handleBannerSelect}
-              icons={BANNER_ICONS}
             />
+            <div className="overflow-hidden rounded-b-xl border border-zinc-800 border-t-0 bg-zinc-900/60">
 
             <PitySummary
               banner={selectedBanner}
@@ -133,6 +128,8 @@ export default function Home() {
                 ).length
               }
             />
+            </div>
+            </div>
 
             <PityCircleGrid
               wishes={controller.wishes.filter(
@@ -145,9 +142,9 @@ export default function Home() {
 
             <section
               aria-label="Wish history"
-              className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4"
+              className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-[35px] pb-4 pt-7"
             >
-              <h2 className="mb-3 font-medium text-zinc-100">
+              <h2 className="mb-3 font-bold text-zinc-100">
                 Wish history
               </h2>
               {displayWishes.length === 0 ? (
@@ -156,8 +153,9 @@ export default function Home() {
                 </p>
               ) : (
                 <>
-                  <div className="hidden grid-cols-[4.5rem_1fr_4rem_9rem] items-center gap-4 px-3 py-2 text-xs font-medium uppercase tracking-wide text-zinc-500 sm:grid">
+                  <div className="hidden grid-cols-[4.5rem_3rem_1fr_4rem_9rem] items-center gap-4 px-3 py-2 text-xs font-bold uppercase tracking-wide text-zinc-500 sm:grid">
                     <span className="text-center">Rarity</span>
+                    <span className="text-center">Icon</span>
                     <span>Name</span>
                     <span className="text-center">Pity</span>
                     <span className="text-center">Date</span>

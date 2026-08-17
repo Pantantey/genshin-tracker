@@ -1,21 +1,121 @@
 @import "tailwindcss";
 
+/*
+ * Theme palette - Nahiïda / Dendro inspired, PASTEL.
+ * Edit the values below to re-theme the whole app from this single file.
+ * These variables feed the Tailwind utilities (zinc / nahida / amber /
+ * indigo / emerald / orange / red / rose) through the @theme mapping below.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base page colors - soft pastel mint */
+  --page-background: #aab9b8;
+  --page-foreground: #94a58f;
+
+  /* Neutrals (zinc) - text shades are dark, surfaces/borders pastel mint */
+  --zinc-50: #1d1d1d;
+  --zinc-100: #181818;
+  --zinc-200: #224738;
+  --zinc-300: #2c2c2c;
+  --zinc-400: #313131;
+  --zinc-500: #0c0c0c;
+  --zinc-600: #8fb09d;
+  --zinc-700: #424242;
+  --zinc-800: #bcd8c8;
+  --zinc-900: #d8e8dc;
+  --zinc-950: #c7dfce;
+
+  /* Nahida / Dendro accent - pastel greens for buttons and active states */
+  --nahida-100: #f1eeee;
+  --nahida-200: #c9f0d8;
+  --nahida-300: #a8e4c0;
+  --nahida-400: #85d8a5;
+  --nahida-500: #12ac52;
+  --nahida-600: #3fa76e;
+  --nahida-700: #2e8a5a;
+  --nahida-800: #227047;
+
+  /* 5★ gold / amber - pastel */
+  --amber-100: #7d5a12;
+  --amber-200: #b2851f;
+  --amber-300: #b96613;
+  --amber-500: #eb851f;
+
+  /* 4★ indigo - pastel */
+  --indigo-200: #4357b6;
+  --indigo-300: #941da3;
+  --indigo-500: #941da3;
+  --indigo-600: #941da3;
+  --indigo-950: #d199e2;
+
+  /* Pity feedback */
+  --emerald-500: #209158;
+  --orange-500: #eb851f;
+  --red-500: #d60c0c;
+
+  /* Error / rose - pastel */
+  --rose-300: #a94d5e;
+  --rose-400: #bf5f70;
+  --rose-800: #e9a4ad;
+  --rose-950: #f8dade;
+
+  --background: var(--page-background);
+  --foreground: var(--page-foreground);
 }
 
+/* Map the Tailwind color utilities to the CSS variables above. */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-zinc-50: var(--zinc-50);
+  --color-zinc-100: var(--zinc-100);
+  --color-zinc-200: var(--zinc-200);
+  --color-zinc-300: var(--zinc-300);
+  --color-zinc-400: var(--zinc-400);
+  --color-zinc-500: var(--zinc-500);
+  --color-zinc-600: var(--zinc-600);
+  --color-zinc-700: var(--zinc-700);
+  --color-zinc-800: var(--zinc-800);
+  --color-zinc-900: var(--zinc-900);
+  --color-zinc-950: var(--zinc-950);
+
+  --color-nahida-100: var(--nahida-100);
+  --color-nahida-200: var(--nahida-200);
+  --color-nahida-300: var(--nahida-300);
+  --color-nahida-400: var(--nahida-400);
+  --color-nahida-500: var(--nahida-500);
+  --color-nahida-600: var(--nahida-600);
+  --color-nahida-700: var(--nahida-700);
+  --color-nahida-800: var(--nahida-800);
+
+  --color-amber-100: var(--amber-100);
+  --color-amber-200: var(--amber-200);
+  --color-amber-300: var(--amber-300);
+  --color-amber-500: var(--amber-500);
+
+  --color-indigo-200: var(--indigo-200);
+  --color-indigo-300: var(--indigo-300);
+  --color-indigo-500: var(--indigo-500);
+  --color-indigo-600: var(--indigo-600);
+  --color-indigo-950: var(--indigo-950);
+
+  --color-emerald-500: var(--emerald-500);
+  --color-orange-500: var(--orange-500);
+  --color-red-500: var(--red-500);
+
+  --color-rose-300: var(--rose-300);
+  --color-rose-400: var(--rose-400);
+  --color-rose-800: var(--rose-800);
+  --color-rose-950: var(--rose-950);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--page-background);
+    --foreground: var(--page-foreground);
   }
 }
 

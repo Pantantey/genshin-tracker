@@ -61,7 +61,7 @@ export function ImportPanel({ existingIds, onImported }: ImportPanelProps) {
       aria-label="Import wish history"
       className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4"
     >
-      <h2 className="mb-1 font-medium text-zinc-100">Import wish history</h2>
+      <h2 className="mb-1 font-bold text-zinc-100">Import wish history</h2>
       <p className="mb-3 text-sm text-zinc-500">
         Run the helper script outside the app, open the wish history, and paste
         the link it copies here.
@@ -79,7 +79,7 @@ export function ImportPanel({ existingIds, onImported }: ImportPanelProps) {
         <textarea
           value={url}
           onChange={(event) => setUrl(event.target.value)}
-          placeholder="https://...getGachaLog?authkey=..."
+          placeholder="Pegar link del resultado de pegar el script en PowerShell"
           rows={2}
           aria-label="Wish history URL"
           className="flex-1 rounded-md border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-zinc-600 focus:outline-none"
@@ -88,7 +88,7 @@ export function ImportPanel({ existingIds, onImported }: ImportPanelProps) {
           type="button"
           onClick={handleImport}
           disabled={importing || url.trim().length === 0}
-          className="rounded-md bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-300 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-md bg-nahida-500 px-4 py-2 text-sm font-medium text-nahida-100 transition-colors hover:bg-nahida-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {importing ? "Importing…" : "Import"}
         </button>

@@ -1,4 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import type { Wish } from "../domain/wish";
+import { getItemIcon, itemInitials } from "../domain/item-icons";
 import { RarityBadge } from "./rarity-badge";
 
 export interface WishRowProps {
@@ -9,9 +13,10 @@ export interface WishRowProps {
 
 export function WishRow({ wish, pity }: WishRowProps) {
   const isFiveStar = wish.rarity === 5;
+  const iconUrl = getItemIcon(wish.name, wish.itemType);
   return (
     <li
-      className={`grid grid-cols-[4.5rem_1fr_4rem_9rem] items-center gap-4 rounded-md border px-3 py-2 ${
+      className={`grid grid-cols-[4.5rem_3rem_1fr_4rem_9rem] items-center gap-4 rounded-md border px-3 py-2 ${
         isFiveStar
           ? "border-amber-500/40 bg-amber-500/[0.05]"
           : "border-zinc-800 bg-zinc-900/40"
@@ -19,6 +24,9 @@ export function WishRow({ wish, pity }: WishRowProps) {
     >
       <span className="justify-self-center">
         <RarityBadge rarity={wish.rarity} />
+      </span>
+      <span className="justify-self-center">
+        <WishItemIcon wish={wish} iconUrl={iconUrl} />
       </span>
       <p
         className={`truncate ${
@@ -34,6 +42,30 @@ export function WishRow({ wish, pity }: WishRowProps) {
         {formatDateTime(wish.timestamp)}
       </span>
     </li>
+  );
+}
+
+/** Circular item thumbnail. Initials only appear when no icon is available. */
+function WishItemIcon({ wish, iconUrl }: { wish: Wish; iconUrl: string | null }) {
+  const [broken, setBroken] = useState(false);
+  const showFallback = iconUrl === null || broken;
+  return (
+    <span
+      aria-hidden="true"
+      className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-zinc-800 bg-zinc-800/60 text-[10px] font-semibold text-zinc-400"
+    >
+      {showFallback ? itemInitials(wish.name) : null}
+      {iconUrl && !broken && (
+        // eslint-disable-next-line @next/next/no-img-element -- local asset, initials fallback
+        <img
+          src={iconUrl}
+          alt=""
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover"
+          onError={() => setBroken(true)}
+        />
+      )}
+    </span>
   );
 }
 

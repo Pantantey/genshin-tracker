@@ -1,20 +1,19 @@
 "use client";
 
 import { BANNER_LABELS, BANNER_ORDER, type BannerType } from "../domain/banner";
+import { BANNER_ASSETS } from "../domain/banner-assets";
 
 export interface BannerTabsProps {
   selected: BannerType;
   onSelect: (banner: BannerType) => void;
-  /** Banner thumbnail image URLs (full character/weapon art). */
-  icons?: Partial<Record<BannerType, string>>;
 }
 
-export function BannerTabs({ selected, onSelect, icons }: BannerTabsProps) {
+export function BannerTabs({ selected, onSelect }: BannerTabsProps) {
   return (
     <div
       role="tablist"
       aria-label="Wish banner"
-      className="flex flex-wrap gap-1 rounded-lg border border-zinc-800 bg-zinc-900/60 p-1"
+      className="grid grid-cols-3 gap-1 p-0"
     >
       {BANNER_ORDER.map((banner) => {
         const active = banner === selected;
@@ -24,24 +23,19 @@ export function BannerTabs({ selected, onSelect, icons }: BannerTabsProps) {
             role="tab"
             aria-selected={active}
             onClick={() => onSelect(banner)}
-            className={`flex items-center rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+            className={`relative flex min-w-0 items-center justify-center gap-2 border px-2 py-2 text-sm transition-all ${
               active
-                ? "bg-zinc-700 text-zinc-50"
-                : "text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200"
+                ? "mt-0 z-10 rounded-t-lg border-b-0 border-zinc-800 bg-zinc-900/60 font-bold text-zinc-50"
+                : "mt-2 rounded-t-lg border-zinc-800 bg-zinc-950/70 font-medium text-zinc-400 hover:bg-zinc-950/60 hover:text-zinc-200"
             }`}
           >
-            {icons?.[banner] && (
-              // eslint-disable-next-line @next/next/no-img-element -- hot-linked CDN images with an onError fallback
-              <img
-                src={icons[banner]!}
-                alt=""
-                className="-ml-1 mr-2 h-9 w-auto rounded object-contain"
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
-                }}
-              />
-            )}
-            {BANNER_LABELS[banner]}
+            {/* eslint-disable-next-line @next/next/no-img-element -- local static asset */}
+            <img
+              src={BANNER_ASSETS[banner].icon}
+              alt=""
+              className="h-8 w-auto rounded object-contain"
+            />
+            <span className="truncate">{BANNER_LABELS[banner]}</span>
           </button>
         );
       })}

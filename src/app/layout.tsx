@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-// import { Footer } from "@/components/footer";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +26,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* The theme class is applied by useTheme (hooks/use-theme.ts) in a
+            useLayoutEffect, which runs before the first paint. A synchronous
+            <script> would be a hydratable script tag inside the React tree
+            (React 19 does not execute scripts rendered as children). */}
+        <Header />
         {children}
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );

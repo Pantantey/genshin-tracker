@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Wish } from "../domain/wish";
 import { getItemIcon, itemInitials } from "../domain/item-icons";
+import { useLanguage } from "@/hooks/use-language";
 
 type RarityFilter = "all" | 4 | 5;
 
@@ -15,21 +16,25 @@ export interface PityCircleGridProps {
   perWish4: Record<string, number>;
   /** Pity per wish id for the 5-star counter. */
   perWish5: Record<string, number>;
+  /** ISO timestamp of the last import, shown next to the title when known. */
+  lastUpdated?: string | null;
 }
-
-const FILTERS: { value: RarityFilter; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: 4, label: "4★" },
-  { value: 5, label: "5★" },
-];
 
 export function PityCircleGrid({
   wishes,
   perWish4,
   perWish5,
+  lastUpdated,
 }: PityCircleGridProps) {
+  const { t } = useLanguage();
   const [filter, setFilter] = useState<RarityFilter>(5);
   const [page, setPage] = useState(0);
+
+  const FILTERS: { value: RarityFilter; label: string }[] = [
+    { value: "all", label: t("pull.all") },
+    { value: 4, label: "4★" },
+    { value: 5, label: "5★" },
+  ];
 
   const visible = [...wishes]
     .sort((a, b) => b.timestamp.localeCompare(a.timestamp))
@@ -41,14 +46,21 @@ export function PityCircleGrid({
 
   return (
     <section
-      aria-label="Pull history"
+      aria-label={t("pull.title")}
       className="px-[38px] flex flex-col rounded-lg border border-zinc-800 bg-zinc-900/50 p-4"
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 className="font-bold text-zinc-100">Pull history</h2>
+        <div className="flex flex-wrap items-center gap-3">
+          <h2 className="font-bold text-zinc-100">{t("pull.title")}</h2>
+          {lastUpdated && (
+            <span className="text-xs tabular-nums text-zinc-500">
+              ({t("summary.lastUpdate")}: {formatDate(lastUpdated)})
+            </span>
+          )}
+        </div>
         <div
           role="group"
-          aria-label="Filter pulls"
+          aria-label={t("pull.filterLabel")}
           className="flex gap-1 rounded-lg border border-zinc-800 bg-zinc-950/60 p-1"
         >
           {FILTERS.map(({ value, label }) => {
@@ -77,7 +89,7 @@ export function PityCircleGrid({
 
       {paged.length === 0 ? (
         <p className="mt-3 text-sm text-zinc-500">
-          No pulls match this filter yet.
+          {t("pull.empty")}
         </p>
       ) : (
         <div className="mt-4 flex flex-wrap justify-start gap-4">
@@ -101,7 +113,7 @@ export function PityCircleGrid({
             onClick={() => setPage((p) => Math.max(0, p - 1))}
             className="rounded-md border border-zinc-800 bg-zinc-900/40 px-3 py-1 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            &laquo; Previous
+            &laquo; {t("pager.previous")}
           </button>
           <span className="tabular-nums">
             {safePage + 1} / {totalPages}
@@ -112,7 +124,7 @@ export function PityCircleGrid({
             onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
             className="rounded-md border border-zinc-800 bg-zinc-900/40 px-3 py-1 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            Next &raquo;
+            {t("pager.next")} &raquo;
           </button>
         </div>
       )}
@@ -180,4 +192,19 @@ function pityColorClass(rarity: Wish["rarity"], pity: number): string {
   if (pity <= 3) return "bg-emerald-500";
   if (pity <= 7) return "bg-orange-500";
   return "bg-red-500";
+}
+
+/**
+ * Format an ISO timestamp into a local "YYYY-MM-DD" date string (no time), so
+ * the stored UTC timestamp is shown in the user's time zone.
+ */
+function formatDate(iso: string): string {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) {
+    return iso;
+  }
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
+    date.getDate()
+  )}`;
 }

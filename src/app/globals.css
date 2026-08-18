@@ -1,65 +1,75 @@
 @import "tailwindcss";
 
 /*
- * Theme palette - Nahiïda / Dendro inspired, PASTEL.
- * Edit the values below to re-theme the whole app from this single file.
- * These variables feed the Tailwind utilities (zinc / nahida / amber /
- * indigo / emerald / orange / red / rose) through the @theme mapping below.
+ * Theme palette — Nahida / Dendro inspired.
+ *
+ * The application defaults to the DARK forest theme: `:root` holds the dark
+ * palette, so the first paint is always dark (no flash). The light pastel
+ * palette is opt-in via the `.light` class on <html> (managed by
+ * hooks/use-theme.ts). Editing these values re-themes the whole app from this
+ * single file. The variables feed the Tailwind utilities (zinc / nahida /
+ * amber / indigo / emerald / orange / red / rose) through the `@theme inline`
+ * mapping below, so a class override re-colors everything.
  */
 :root {
-  /* Base page colors - soft pastel mint */
-  --page-background: #aab9b8;
-  --page-foreground: #94a58f;
+  /* Base page colors - deep forest green (default dark theme) */
+  --page-background: #12111356;
+  --page-foreground: #c9d5cf;
 
-  /* Neutrals (zinc) - text shades are dark, surfaces/borders pastel mint */
-  --zinc-50: #1d1d1d;
-  --zinc-100: #181818;
-  --zinc-200: #224738;
-  --zinc-300: #2c2c2c;
-  --zinc-400: #313131;
-  --zinc-500: #0c0c0c;
-  --zinc-600: #8fb09d;
-  --zinc-700: #424242;
-  --zinc-800: #bcd8c8;
-  --zinc-900: #d8e8dc;
-  --zinc-950: #c7dfce;
+  /* Neutrals (zinc) - cream text, green-tinted dark surfaces/borders */
+  --zinc-50: #f4f6f5;
+  --zinc-100: #e8ecea;
+  --zinc-200: #d4dcd7;
+  --zinc-300: #ffffff;
+  --zinc-400: #ffffff;
+  --zinc-500: #ebeaea;
+  --zinc-600: #4d6259;
+  --zinc-700: #323d61;
+  --zinc-800: #323d61;
+  --zinc-900: #141f31;
+  --zinc-950: #212d47;
 
-  /* Nahida / Dendro accent - pastel greens for buttons and active states */
-  --nahida-100: #f1eeee;
+  /* Nahida / Dendro accent */
+  --nahida-100: #eafaf0;
   --nahida-200: #c9f0d8;
-  --nahida-300: #a8e4c0;
+  --nahida-300: #27bde2;
   --nahida-400: #85d8a5;
-  --nahida-500: #12ac52;
+  --nahida-500: #175c6d;
   --nahida-600: #3fa76e;
   --nahida-700: #2e8a5a;
   --nahida-800: #227047;
 
-  /* 5★ gold / amber - pastel */
-  --amber-100: #7d5a12;
-  --amber-200: #b2851f;
-  --amber-300: #b96613;
+  /* 5★ gold / amber */
+  --amber-100: #ffe0b0;
+  --amber-200: #f5c078;
+  --amber-300: #eba04c;
   --amber-500: #eb851f;
 
-  /* 4★ indigo - pastel */
-  --indigo-200: #4357b6;
-  --indigo-300: #941da3;
-  --indigo-500: #941da3;
-  --indigo-600: #941da3;
-  --indigo-950: #d199e2;
+  /* 4★ indigo */
+  --indigo-200: #c8b6f7;
+  --indigo-300: #a48ef0;
+  --indigo-500: #a855f7;
+  --indigo-600: #8b3fd8;
+  --indigo-950: #3b2a6e;
 
   /* Pity feedback */
-  --emerald-500: #209158;
-  --orange-500: #eb851f;
-  --red-500: #d60c0c;
+  --emerald-500: #0c9b13;
+  --orange-500: #f17610;
+  --red-500: #e21717;
 
-  /* Error / rose - pastel */
-  --rose-300: #a94d5e;
-  --rose-400: #bf5f70;
-  --rose-800: #e9a4ad;
-  --rose-950: #f8dade;
+  /* Error / rose */
+  --rose-300: #f9a8b8;
+  --rose-400: #fb7185;
+  --rose-800: #c2566a;
+  --rose-950: #4c2230;
+
+  /* Language dropdown: selected option text (dark mode keeps the green) */
+  --lang-selected: #8de0f5;
 
   --background: var(--page-background);
   --foreground: var(--page-foreground);
+
+  color-scheme: dark;
 }
 
 /* Map the Tailwind color utilities to the CSS variables above. */
@@ -108,15 +118,72 @@
   --color-rose-800: var(--rose-800);
   --color-rose-950: var(--rose-950);
 
+  --color-lang-selected: var(--lang-selected);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--page-background);
-    --foreground: var(--page-foreground);
-  }
+/* Light theme (soft pastel mint). Opt-in via the `light` class on <html>,
+   toggled by the Header switch and persisted in localStorage. */
+.light {
+  --page-background: #aab9b8;
+  --page-foreground: #94a58f;
+
+  /* Neutrals (zinc) - text shades are dark, surfaces/borders pastel mint */
+  --zinc-50: #1d1d1d;
+  --zinc-100: #181818;
+  --zinc-200: #224738;
+  --zinc-300: #2c2c2c;
+  --zinc-400: #313131;
+  --zinc-500: #0c0c0c;
+  --zinc-600: #8fb09d;
+  --zinc-700: #424242;
+  --zinc-800: #0b662763;
+  --zinc-900: #d8e8dc;
+  --zinc-950: #c7dfce;
+
+  /* Nahida / Dendro accent - pastel greens for buttons and active states */
+  --nahida-100: #f1eeee;
+  --nahida-200: #c9f0d8;
+  --nahida-300: #a8e4c0;
+  --nahida-400: #85d8a5;
+  --nahida-500: #209415;
+  --nahida-600: #3fa76e;
+  --nahida-700: #2e8a5a;
+  --nahida-800: #227047;
+
+  /* 5★ gold / amber - pastel */
+  --amber-100: #7d5a12;
+  --amber-200: #b2851f;
+  --amber-300: #b96613;
+  --amber-500: #eb851f;
+
+  /* 4★ indigo - pastel */
+  --indigo-200: #4357b6;
+  --indigo-300: #941da3;
+  --indigo-500: #941da3;
+  --indigo-600: #941da3;
+  --indigo-950: #d199e2;
+
+  /* Pity feedback */
+  --emerald-500: #209158;
+  --orange-500: #eb851f;
+  --red-500: #d60c0c;
+
+  /* Error / rose - pastel */
+  --rose-300: #a94d5e;
+  --rose-400: #bf5f70;
+  --rose-800: #e9a4ad;
+  --rose-950: #f8dade;
+
+  /* Language dropdown: selected option text (black so it reads on light) */
+  --lang-selected: #181818;
+
+  --background: var(--page-background);
+  --foreground: var(--page-foreground);
+
+  color-scheme: light;
 }
 
 body {

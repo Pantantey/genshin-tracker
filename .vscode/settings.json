@@ -1,0 +1,7 @@
+{
+  // Tailwind CSS v4 uses custom at-rules (@theme, @utility, @variant, ...)
+  // that VS Code's built-in CSS linter does not recognize. The CSS is compiled
+  // by Tailwind's PostCSS plugin (@tailwindcss/postcss), so the built-in
+  // linter's "Unknown at rule" warnings are false positives.
+  "css.lint.unknownAtRules": "ignore"
+}

@@ -1,7 +1,9 @@
 "use client";
 
-import { BANNER_LABELS, BANNER_ORDER, type BannerType } from "../domain/banner";
+import { BANNER_ORDER, type BannerType } from "../domain/banner";
 import { BANNER_ASSETS } from "../domain/banner-assets";
+import { useLanguage } from "@/hooks/use-language";
+import type { TranslationKey } from "@/lib/i18n";
 
 export interface BannerTabsProps {
   selected: BannerType;
@@ -9,10 +11,12 @@ export interface BannerTabsProps {
 }
 
 export function BannerTabs({ selected, onSelect }: BannerTabsProps) {
+  const { t } = useLanguage();
+
   return (
     <div
       role="tablist"
-      aria-label="Wish banner"
+      aria-label={t("banner.tabsLabel")}
       className="grid grid-cols-3 gap-1 p-0"
     >
       {BANNER_ORDER.map((banner) => {
@@ -35,7 +39,9 @@ export function BannerTabs({ selected, onSelect }: BannerTabsProps) {
               alt=""
               className="h-8 w-auto rounded object-contain"
             />
-            <span className="truncate">{BANNER_LABELS[banner]}</span>
+            <span className="truncate">
+              {t(`banner.${banner}` as TranslationKey)}
+            </span>
           </button>
         );
       })}

@@ -7,18 +7,22 @@ import {
   type ImportProgress,
   type ImportResult,
 } from "../services/importer";
+import { useLanguage } from "@/hooks/use-language";
 
-export interface ImportPanelProps {
+/**
+ * The import field: paste the wish-history link PowerShell returned, then
+ * click Import. Renders live progress, a summary and any warnings. It is the
+ * same field that used to live on the home page, extracted so the Import page
+ * can present it as a step of its own guide.
+ */
+export interface ImportFormProps {
   existingIds: ReadonlySet<string>;
   onImported: (wishes: Wish[]) => Promise<void>;
 }
 
-const COPY_SCRIPT =
-  "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex \"&{$((New-Object System.Net.WebClient).DownloadString('https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235/raw/getlink.ps1'))} global\"";
-
-export function ImportPanel({ existingIds, onImported }: ImportPanelProps) {
+export function ImportForm({ existingIds, onImported }: ImportFormProps) {
+  const { t } = useLanguage();
   const [url, setUrl] = useState("");
-  const [copied, setCopied] = useState(false);
   const [importing, setImporting] = useState(false);
   const [progress, setProgress] = useState<ImportProgress | null>(null);
   const [result, setResult] = useState<ImportResult | null>(null);
@@ -42,46 +46,21 @@ export function ImportPanel({ existingIds, onImported }: ImportPanelProps) {
         await onImported(res.wishes);
       }
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Import failed.");
+      setError(caught instanceof Error ? caught.message : t("form.failed"));
     } finally {
       setImporting(false);
     }
   }
 
-  function handleCopyScript() {
-    navigator.clipboard.writeText(COPY_SCRIPT);
-    setCopied(true);
-    window.setTimeout(() => {
-      setCopied(false);
-    }, 2000);
-  }
-
   return (
-    <section
-      aria-label="Import wish history"
-      className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4"
-    >
-      <h2 className="mb-1 font-bold text-zinc-100">Import wish history</h2>
-      <p className="mb-3 text-sm text-zinc-500">
-        Run the helper script outside the app, open the wish history, and paste
-        the link it copies here.
-      </p>
-      <div className="mb-3">
-        <button
-          type="button"
-          onClick={handleCopyScript}
-          className="rounded-md border border-zinc-700 bg-zinc-900/50 px-3 py-1.5 text-xs font-medium text-zinc-300 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
-        >
-          {copied ? "Copied" : "Copy script"}
-        </button>
-      </div>
+    <div>
       <div className="flex flex-col gap-2 sm:flex-row">
         <textarea
           value={url}
           onChange={(event) => setUrl(event.target.value)}
-          placeholder="Pegar link del resultado de pegar el script en PowerShell"
+          placeholder={t("form.placeholder")}
           rows={2}
-          aria-label="Wish history URL"
+          aria-label={t("form.ariaLabel")}
           className="flex-1 rounded-md border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-zinc-600 focus:outline-none"
         />
         <button
@@ -90,7 +69,7 @@ export function ImportPanel({ existingIds, onImported }: ImportPanelProps) {
           disabled={importing || url.trim().length === 0}
           className="rounded-md bg-nahida-500 px-4 py-2 text-sm font-medium text-nahida-100 transition-colors hover:bg-nahida-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {importing ? "Importing…" : "Import"}
+          {importing ? t("form.importing") : t("form.import")}
         </button>
       </div>
 
@@ -112,23 +91,37 @@ export function ImportPanel({ existingIds, onImported }: ImportPanelProps) {
 
       {result && !importing && (
         <div className="mt-3 rounded-md border border-zinc-800 bg-zinc-950/60 px-3 py-2 text-sm text-zinc-300">
-          <p className="font-medium text-zinc-100">Import completed</p>
+          <p className="font-medium text-zinc-100">{t("form.completed")}</p>
           <ul className="mt-1 list-inside list-disc text-zinc-400">
-            <li>{result.addedCount} new wish{result.addedCount === 1 ? "" : "es"} added</li>
-            <li>{result.alreadyCount} already present</li>
-            <li>{result.duplicateCount} duplicates within this run</li>
-            <li>{result.invalidCount} unreadable records skipped</li>
+            <li>
+              {result.addedCount}{" "}
+              {t(result.addedCount === 1 ? "form.addedWish" : "form.addedWishes")}
+            </li>
+            <li>
+              {result.alreadyCount} {t("form.already")}
+            </li>
+            <li>
+              {result.duplicateCount} {t("form.duplicates")}
+            </li>
+            <li>
+              {result.invalidCount} {t("form.invalid")}
+            </li>
             {result.skippedGachaTypes.length > 0 && (
               <li>
-                No data for banners: {result.skippedGachaTypes.join(", ")}
+                {t("form.noData")} {result.skippedGachaTypes.join(", ")}
               </li>
             )}
           </ul>
           {result.errors.length > 0 && (
             <div className="mt-2">
               <p className="text-rose-300">
-                {result.errors.length} warning
-                {result.errors.length === 1 ? "" : "s"} during import:
+                {result.errors.length}{" "}
+                {t(
+                  result.errors.length === 1
+                    ? "form.warning"
+                    : "form.warnings"
+                )}{" "}
+                {t("form.duringImport")}
               </p>
               <ul className="mt-1 space-y-0.5 text-xs text-rose-400/90">
                 {result.errors.map((message, index) => (
@@ -141,6 +134,6 @@ export function ImportPanel({ existingIds, onImported }: ImportPanelProps) {
           )}
         </div>
       )}
-    </section>
+    </div>
   );
 }

@@ -42,7 +42,7 @@ export function Footer() {
           <ul className="mt-2 space-y-1 text-sm text-text-black">
             <li>
               <a href="mailto:andrey99fr@gmail.com" className="text-placeholder transition-colors hover:text-link-hover">
-                andrey99fr@gmail.com
+                Andrey99fr@gmail.com
               </a>
             </li>
             <li>

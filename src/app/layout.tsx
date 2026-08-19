@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Genshin Wish Tracker",
+  title: "Genshin-Info.site",
   description: "Import, store and analyze your Genshin Impact wish history locally.",
 };
 

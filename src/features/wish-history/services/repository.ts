@@ -15,6 +15,8 @@ export interface WishRepository {
   /** Insert or overwrite wishes by `id`. */
   upsertWishes(wishes: Wish[]): Promise<void>;
   deleteWish(id: string): Promise<void>;
+  /** Delete every wish belonging to one account (uid). Used when replacing a stored history. */
+  deleteByUid(uid: string): Promise<void>;
   clearWishes(): Promise<void>;
   countWishes(): Promise<number>;
 }

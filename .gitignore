@@ -47,7 +47,7 @@ next-env.d.ts
 script actualizar iconos.txt
 
 # dev/prod server logs generated when running `next dev` / `next start`
-dev-server.log
-dev-server-err.log
+dev-server*
+dev-3000*
 prod-server.log
 prod-server-err.log

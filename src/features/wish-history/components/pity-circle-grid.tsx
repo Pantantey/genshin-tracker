@@ -47,13 +47,13 @@ export function PityCircleGrid({
   return (
     <section
       aria-label={t("pull.title")}
-      className="px-[38px] flex flex-col rounded-lg border border-zinc-800 bg-zinc-900/50 p-4"
+      className="px-[38px] flex flex-col rounded-lg border border-borders bg-bg-cards/50 p-4"
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex flex-wrap items-center gap-3">
-          <h2 className="font-bold text-zinc-100">{t("pull.title")}</h2>
+          <h2 className="font-bold text-text-black">{t("pull.title")}</h2>
           {lastUpdated && (
-            <span className="text-xs tabular-nums text-zinc-500">
+            <span className="text-xs tabular-nums text-text-black">
               ({t("summary.lastUpdate")}: {formatDate(lastUpdated)})
             </span>
           )}
@@ -61,7 +61,7 @@ export function PityCircleGrid({
         <div
           role="group"
           aria-label={t("pull.filterLabel")}
-          className="flex gap-1 rounded-lg border border-zinc-800 bg-zinc-950/60 p-1"
+          className="flex gap-1 rounded-lg border border-borders bg-bg-cards/60 p-1"
         >
           {FILTERS.map(({ value, label }) => {
             const active = filter === value;
@@ -76,8 +76,8 @@ export function PityCircleGrid({
                 }}
                 className={`rounded-md px-4 py-2 text-sm font-semibold transition-colors ${
                   active
-                    ? "bg-nahida-500 text-nahida-100"
-                    : "text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200"
+                    ? "bg-bg-button text-text-white"
+                    : "text-text-black hover:bg-borders hover:text-text-black"
                 }`}
               >
                 {label}
@@ -88,7 +88,7 @@ export function PityCircleGrid({
       </div>
 
       {paged.length === 0 ? (
-        <p className="mt-3 text-sm text-zinc-500">
+        <p className="mt-3 text-sm text-text-black">
           {t("pull.empty")}
         </p>
       ) : (
@@ -106,12 +106,12 @@ export function PityCircleGrid({
       )}
 
       {totalPages > 1 && (
-        <div className="mt-4 flex items-center justify-center gap-4 border-t border-zinc-800 pt-3 text-sm text-zinc-400">
+        <div className="mt-4 flex items-center justify-center gap-4 border-t border-borders pt-3 text-sm text-text-black">
           <button
             type="button"
             disabled={safePage === 0}
             onClick={() => setPage((p) => Math.max(0, p - 1))}
-            className="rounded-md border border-zinc-800 bg-zinc-900/40 px-3 py-1 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-md border border-borders bg-bg-cards/40 px-3 py-1 disabled:cursor-not-allowed disabled:opacity-40"
           >
             &laquo; {t("pager.previous")}
           </button>
@@ -122,7 +122,7 @@ export function PityCircleGrid({
             type="button"
             disabled={safePage >= totalPages - 1}
             onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
-            className="rounded-md border border-zinc-800 bg-zinc-900/40 px-3 py-1 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-md border border-borders bg-bg-cards/40 px-3 py-1 disabled:cursor-not-allowed disabled:opacity-40"
           >
             {t("pager.next")} &raquo;
           </button>
@@ -143,8 +143,8 @@ function PityCircle({ wish, pity }: { wish: Wish; pity?: number }) {
     <div
       className={`relative flex h-16 w-16 items-center justify-center rounded-full border-2 ${
         isFive
-          ? "border-amber-500 bg-amber-500/10"
-          : "border-indigo-500 bg-indigo-500/10"
+          ? "border-border-5-star bg-bg-5-star"
+          : "border-rarity-4-star bg-rarity-4-star/10"
       }`}
       title={wish.name}
     >
@@ -160,7 +160,7 @@ function PityCircle({ wish, pity }: { wish: Wish; pity?: number }) {
       ) : (
         <span
           className={`text-base font-semibold ${
-            isFive ? "text-amber-200" : "text-indigo-200"
+            isFive ? "text-important-text" : "text-rarity-4-star"
           }`}
         >
           {itemInitials(wish.name)}

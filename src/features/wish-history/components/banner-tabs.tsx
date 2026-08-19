@@ -29,8 +29,8 @@ export function BannerTabs({ selected, onSelect }: BannerTabsProps) {
             onClick={() => onSelect(banner)}
             className={`relative flex min-w-0 items-center justify-center gap-2 border px-2 py-2 text-sm transition-all ${
               active
-                ? "mt-0 z-10 rounded-t-lg border-b-0 border-zinc-800 bg-zinc-900/60 font-bold text-zinc-50"
-                : "mt-2 rounded-t-lg border-zinc-800 bg-zinc-950/70 font-medium text-zinc-400 hover:bg-zinc-950/60 hover:text-zinc-200"
+                ? "mt-0 z-10 rounded-t-lg border-b-0 border-borders bg-bg-cards/60 font-bold text-text-black"
+                : "mt-2 rounded-t-lg border-borders bg-tab-inactive-bg/80 font-medium text-text-black hover:bg-tab-inactive-bg hover:text-text-black"
             }`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element -- local static asset */}

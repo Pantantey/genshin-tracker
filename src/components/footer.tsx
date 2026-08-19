@@ -6,38 +6,28 @@ export function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="mt-8 border-t border-zinc-800 bg-zinc-950/60 px-4 py-8">
+    <footer className="mt-8 border-t border-borders bg-bg-cards/60 px-4 py-8">
       <div className="px-4 mx-auto flex w-full max-w-4xl flex-col gap-8 sm:flex-row sm:justify-between">
 
         <div className="max-w-sm">
-          <h2 className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+          <h2 className="text-xs font-semibold uppercase tracking-wide text-text-black">
             {t("footer.resources")}
           </h2>
-          <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+          <p className="mt-2 text-sm leading-relaxed text-text-black">
             {t("footer.disclaimer")}
           </p>
         </div>
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+          <h2 className="text-xs font-semibold uppercase tracking-wide text-text-black">
             {t("footer.support")}
           </h2>
-          <ul className="mt-2 space-y-1 text-sm text-zinc-300">
+          <ul className="mt-2 space-y-1 text-sm text-text-black">
             <li>
               <a
-                href="https://paypal.me/YourHandle"
+                href="https://ko-fi.com/genshininfo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-zinc-100"
-              >
-                {t("footer.donate")}
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://ko-fi.com/yourname"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-zinc-100"
+                className="text-placeholder transition-colors hover:text-link-hover"
               >
                 {t("footer.coffee")}
               </a>
@@ -46,13 +36,18 @@ export function Footer() {
         </div>
 
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+          <h2 className="text-xs font-semibold uppercase tracking-wide text-text-black">
             {t("footer.contact")}
           </h2>
-          <ul className="mt-2 space-y-1 text-sm text-zinc-300">
+          <ul className="mt-2 space-y-1 text-sm text-text-black">
             <li>
-              <a href="mailto:contact@genshintracker.com" className="hover:text-zinc-100">
-                contact@genshintracker.com
+              <a href="mailto:andrey99fr@gmail.com" className="text-placeholder transition-colors hover:text-link-hover">
+                andrey99fr@gmail.com
+              </a>
+            </li>
+            <li>
+              <a href="https://discord.gg/Sx56ass5P" className="text-placeholder transition-colors hover:text-link-hover">
+                Discord
               </a>
             </li>
           </ul>
@@ -61,11 +56,8 @@ export function Footer() {
 
       </div>
 
-      <div className="mx-auto mt-8 max-w-4xl border-t border-zinc-800 pt-4 text-center">
-        <p className="text-sm font-medium text-zinc-300">&copy; 2026 Genshin Tracker</p>
-        <p className="mt-1 text-sm leading-relaxed text-zinc-500">
-          {t("footer.tagline")}
-        </p>
+      <div className="mx-auto mt-8 max-w-4xl border-t border-borders pt-4 text-center">
+        <p className="text-sm font-medium text-text-black">&copy; 2026 Genshin-Info.site</p>
       </div>
     </footer>
   );

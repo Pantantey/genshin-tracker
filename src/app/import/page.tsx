@@ -25,23 +25,28 @@ export default function ImportPage() {
     [controller.wishes]
   );
 
+  const existingUids = useMemo(
+    () => new Set(controller.accounts.map((a) => a.uid)),
+    [controller.accounts]
+  );
+
   return (
     <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-8">
-      <h1 className="text-2xl font-semibold text-zinc-50">
+      <h1 className="text-2xl font-semibold text-text-black">
         {t("import.title")}
       </h1>
 
-      <div className="mt-4 rounded-md border border-amber-300/40 bg-amber-500/10 px-4 py-3">
-        <p className="text-sm font-semibold leading-relaxed text-amber-200">
+      <div className="mt-4 rounded-md border border-rarity-5-star/40 bg-border-5-star/10 px-4 py-3">
+        <p className="text-sm font-semibold leading-relaxed text-important-text">
           {t("import.privacyNotice")}
         </p>
       </div>
 
-      <p className="mt-3 text-sm font-medium text-zinc-400">
+      <p className="mt-3 text-sm font-medium text-text-black">
         {t("import.reminderNotice")}
       </p>
 
-      <p className="mt-3 text-sm text-zinc-500">
+      <p className="mt-3 text-sm text-text-black">
         {t("import.subtitle")}
       </p>
 
@@ -62,7 +67,7 @@ export default function ImportPage() {
           <div className="flex flex-col gap-2 sm:flex-row sm:items-stretch">
             <pre
               aria-label={t("import.scriptAria")}
-              className="min-w-0 flex-1 overflow-x-auto whitespace-pre-wrap break-all rounded-md border border-zinc-800 bg-zinc-950 p-3 text-xs leading-relaxed text-zinc-300"
+              className="min-w-0 flex-1 overflow-x-auto whitespace-pre-wrap break-all rounded-md border border-borders bg-bg-cards p-3 text-xs leading-relaxed text-text-black"
             >
               <code>{COPY_SCRIPT}</code>
             </pre>
@@ -74,7 +79,7 @@ export default function ImportPage() {
               href="https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-nahida-300 underline underline-offset-2 hover:text-nahida-200"
+              className="font-medium text-links underline underline-offset-2 hover:text-links"
             >
               {t("import.here")}
             </a>
@@ -98,6 +103,7 @@ export default function ImportPage() {
           <p className="mb-3">{t("import.step8Body")}</p>
           <ImportForm
             existingIds={existingIds}
+            existingUids={existingUids}
             onImported={controller.addImported}
           />
         </Step>
@@ -106,7 +112,7 @@ export default function ImportPage() {
           <p className="mb-3">{t("import.step9Body")}</p>
           <Link
             href="/"
-            className="inline-block rounded-md bg-nahida-500 px-4 py-2 text-sm font-medium text-nahida-100 transition-colors hover:bg-nahida-400"
+            className="inline-block rounded-md bg-bg-button px-4 py-2 text-sm font-medium text-text-white transition-colors hover:bg-bg-button"
           >
             {t("import.step9Button")}
           </Link>
@@ -126,18 +132,18 @@ function Step({
   children?: ReactNode;
 }) {
   return (
-    <li className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4">
+    <li className="rounded-lg border border-borders bg-bg-cards/50 p-4">
       <div className="flex items-start gap-3">
         <span
           aria-hidden="true"
-          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-nahida-500 text-sm font-bold text-nahida-100"
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-bg-button text-sm font-bold text-text-white"
         >
           {number}
         </span>
         <div className="min-w-0 flex-1">
-          <h2 className="font-semibold text-zinc-100">{title}</h2>
+          <h2 className="font-semibold text-text-black">{title}</h2>
           {children && (
-            <div className="mt-2 space-y-1 text-sm text-zinc-400">
+            <div className="mt-2 space-y-1 text-sm text-text-black">
               {children}
             </div>
           )}

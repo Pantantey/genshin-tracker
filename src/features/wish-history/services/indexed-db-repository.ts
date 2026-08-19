@@ -102,6 +102,32 @@ export class IndexedDbWishRepository implements WishRepository {
     });
   }
 
+  async deleteByUid(uid: string): Promise<void> {
+    const db = await this.open();
+    await new Promise<void>((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, "readwrite");
+      const store = tx.objectStore(STORE_NAME);
+      const request = store.openCursor();
+      request.onsuccess = () => {
+        const cursor = request.result;
+        if (cursor) {
+          const wish = cursor.value as Wish;
+          if (wish.uid === uid) {
+            cursor.delete();
+          }
+          cursor.continue();
+        }
+      };
+      request.onerror = () =>
+        reject(request.error ?? new Error("deleteByUid scan failed"));
+      tx.oncomplete = () => resolve();
+      tx.onerror = () =>
+        reject(tx.error ?? new Error("deleteByUid transaction failed"));
+      tx.onabort = () =>
+        reject(tx.error ?? new Error("deleteByUid transaction aborted"));
+    });
+  }
+
   async clearWishes(): Promise<void> {
     const db = await this.open();
     await new Promise<void>((resolve, reject) => {

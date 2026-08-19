@@ -29,7 +29,7 @@ export function CopyScriptButton() {
       onClick={handleCopy}
       // Fixed-width + centered so the button does not change size when the
       // label toggles between "Copy script" and "Copied".
-      className="min-w-[112px] shrink-0 rounded-md border border-zinc-700 bg-zinc-900/50 px-3 py-1.5 text-center text-xs font-medium text-zinc-300 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
+      className="min-w-[112px] shrink-0 rounded-md border border-borders bg-bg-cards/50 px-3 py-1.5 text-center text-xs font-medium text-text-black transition-colors hover:bg-borders hover:text-text-black"
     >
       {copied ? t("copy.copied") : t("copy.script")}
     </button>

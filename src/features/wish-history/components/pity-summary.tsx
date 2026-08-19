@@ -20,8 +20,6 @@ export interface PitySummaryProps {
   outcome: OutcomeResult;
   /** Total stored wishes for this banner (diagnostic + comparison with the game). */
   total: number;
-  /** Account/game UID shown above the pity counters, when available. */
-  uid?: string | null;
 }
 
 export function PitySummary({
@@ -30,7 +28,6 @@ export function PitySummary({
   pity5,
   outcome,
   total,
-  uid,
 }: PitySummaryProps) {
   const { t } = useLanguage();
 
@@ -74,7 +71,7 @@ export function PitySummary({
               <span
                 key={slug}
                 title={slug}
-                className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border-2 border-indigo-500 bg-indigo-950/80"
+                className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border-2 border-rarity-4-star bg-bg-rarity-4-star/80"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element -- local static asset */}
                 <img
@@ -88,8 +85,8 @@ export function PitySummary({
         )}
       </div>
 
-      <div className="grid w-full flex-1 grid-cols-1 divide-y divide-zinc-800">
-        {uid && <SummaryItem label={t("summary.uid")} value={uid} />}
+      <div className="grid w-full flex-1 grid-cols-1 divide-y divide-borders">
+
         <SummaryItem label={t("summary.pity4")} value={`${pity4.currentPity} / 10`} />
         <SummaryItem label={t("summary.pity5")} value={`${pity5.currentPity} / ${banner === "weapon" ? 80 : 90}`} />
         <SummaryItem
@@ -105,10 +102,10 @@ export function PitySummary({
 function SummaryItem({ label, value }: { label: string; value: string }) {
   return (
     <div className="py-3 first:pt-0 last:pb-0">
-      <dt className="text-lg font-bold uppercase tracking-wide text-zinc-500">
+      <dt className="text-lg font-bold uppercase tracking-wide text-text-black">
         {label}
       </dt>
-      <dd className="mt-1 text-base font-medium text-zinc-100">{value}</dd>
+      <dd className="mt-1 text-base font-medium text-text-black">{value}</dd>
     </div>
   );
 }

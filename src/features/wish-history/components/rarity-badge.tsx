@@ -1,9 +1,9 @@
 import type { WishRarity } from "../domain/wish";
 
 const STYLES: Record<WishRarity, string> = {
-  3: "border-zinc-600/70 bg-zinc-800/60 text-zinc-300",
-  4: "border-indigo-600/70 bg-indigo-950/60 text-indigo-300",
-  5: "border-amber-500 bg-amber-500/15 text-amber-300",
+  3: "border-placeholder/70 bg-borders text-text-black",
+  4: "border-rarity-4-star/70 bg-bg-rarity-4-star/60 text-rarity-4-star",
+  5: "border-border-5-star bg-border-5-star/15 text-rarity-5-star",
 };
 
 export function RarityBadge({ rarity }: { rarity: WishRarity }) {

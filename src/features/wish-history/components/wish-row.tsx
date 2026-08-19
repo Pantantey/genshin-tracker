@@ -18,8 +18,8 @@ export function WishRow({ wish, pity }: WishRowProps) {
     <li
       className={`grid grid-cols-[4.5rem_3rem_1fr_4rem_9rem] items-center gap-4 rounded-md border px-3 py-2 ${
         isFiveStar
-          ? "border-amber-500/40 bg-amber-500/[0.05]"
-          : "border-zinc-800 bg-zinc-900/40"
+          ? "border-border-5-star/40 bg-bg-5-star"
+          : "border-borders bg-bg-cards/40"
       }`}
     >
       <span className="justify-self-center">
@@ -30,15 +30,15 @@ export function WishRow({ wish, pity }: WishRowProps) {
       </span>
       <p
         className={`truncate ${
-          isFiveStar ? "font-semibold text-amber-100" : "text-zinc-200"
+          isFiveStar ? "font-semibold text-wish-name" : "text-text-black"
         }`}
       >
         {wish.name}
       </p>
-      <span className="text-center text-xs tabular-nums text-zinc-400">
+      <span className="text-center text-xs tabular-nums text-text-black">
         {typeof pity === "number" ? pity : ""}
       </span>
-      <span className="text-center text-xs tabular-nums text-zinc-500">
+      <span className="text-center text-xs tabular-nums text-text-black">
         {formatDateTime(wish.timestamp)}
       </span>
     </li>
@@ -52,7 +52,7 @@ function WishItemIcon({ wish, iconUrl }: { wish: Wish; iconUrl: string | null })
   return (
     <span
       aria-hidden="true"
-      className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-zinc-800 bg-zinc-800/60 text-[10px] font-semibold text-zinc-400"
+      className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-borders bg-bg-icons text-[10px] font-semibold text-text-black"
     >
       {showFallback ? itemInitials(wish.name) : null}
       {iconUrl && !broken && (

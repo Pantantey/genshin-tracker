@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Import Wish History — Genshin Wish Tracker",
+  title: "Import Wish History — Genshin-Info.site",
   description: "Import your Genshin Impact wish history step by step.",
 };
 

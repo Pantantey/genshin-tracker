@@ -20,11 +20,11 @@ export function Header() {
   const onImport = pathname === "/import";
 
   return (
-    <header className="sticky top-0 z-20 border-b border-zinc-800 bg-zinc-900/70 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-borders bg-bg-cards/70 backdrop-blur">
       <div className="mx-auto flex w-full max-w-4xl items-center justify-between gap-4 px-4 py-3">
         <Link
           href="/"
-          className="flex min-w-0 items-center gap-2.5 text-zinc-100 transition-colors hover:text-zinc-50"
+          className="flex min-w-0 items-center gap-2.5 text-text-black transition-colors hover:text-text-black"
         >
           {/* eslint-disable-next-line @next/next/no-img-element -- site icon (favicon) */}
           <img
@@ -33,7 +33,7 @@ export function Header() {
             className="h-8 w-8 shrink-0 rounded-full object-cover"
           />
           <span className="truncate text-lg font-semibold tracking-tight">
-            Genshin Wish Tracker
+            Genshin-Info.site
           </span>
         </Link>
 
@@ -42,10 +42,10 @@ export function Header() {
           <Link
             href="/import"
             aria-current={onImport ? "page" : undefined}
-            className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+            className={`mx-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
               onImport
-                ? "bg-nahida-500 text-nahida-100"
-                : "text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100"
+                ? "bg-bg-button text-text-white"
+                : "text-text-black hover:bg-borders hover:text-text-black"
             }`}
           >
             {t("header.import")}
@@ -72,7 +72,7 @@ function ThemeSwitch({
       aria-label={t("header.themeGroup")}
       className="flex items-center gap-1.5"
     >
-      <span aria-hidden="true" className="text-zinc-100">
+      <span aria-hidden="true" className="text-text-black">
         <SunIcon />
       </span>
       <button
@@ -84,19 +84,19 @@ function ThemeSwitch({
         // SSR always renders "light"; the hydrated value may differ, so the
         // switch is patched client-side without a hydration warning.
         suppressHydrationWarning
-        className={`relative flex h-4 w-[30px] shrink-0 cursor-pointer items-center rounded-full border border-zinc-100 bg-zinc-950/60 transition-colors ${
-          isDark ? "bg-zinc-700" : ""
+        className={`relative flex h-4 w-[30px] shrink-0 cursor-pointer items-center rounded-full border border-text-black bg-bg-cards/60 transition-colors ${
+          isDark ? "bg-borders" : ""
         }`}
       >
         <span
           aria-hidden="true"
           suppressHydrationWarning
-          className={`absolute left-[2px] top-[1px] h-3 w-3 rounded-full bg-zinc-100 shadow transition-transform ${
+          className={`absolute left-[2px] top-[1px] h-3 w-3 rounded-full bg-text-black shadow transition-transform ${
             isDark ? "translate-x-[12px]" : ""
           }`}
         />
       </button>
-      <span aria-hidden="true" className="text-zinc-100">
+      <span aria-hidden="true" className="text-text-black">
         <MoonIcon />
       </span>
     </div>
@@ -153,7 +153,7 @@ function LanguageSwitch() {
         aria-expanded={open}
         aria-label={t("header.language")}
         onClick={() => setOpen((o) => !o)}
-        className="flex h-7 items-center gap-1.5 rounded-md border border-zinc-800 bg-zinc-950/60 px-2 text-sm font-medium text-zinc-300 transition-colors hover:bg-zinc-800 hover:text-zinc-100"
+        className="flex h-7 items-center gap-1.5 rounded-md border border-borders bg-bg-cards/60 px-2 text-sm font-medium text-text-black transition-colors hover:bg-borders hover:text-text-black"
       >
         <GlobeIcon />
         <span className="uppercase">{lang}</span>
@@ -171,7 +171,7 @@ function LanguageSwitch() {
           <ul
             role="listbox"
             aria-label={t("header.language")}
-            className="absolute right-0 z-20 mt-1.5 min-w-[8.5rem] overflow-hidden rounded-md border border-zinc-800 bg-zinc-950 py-1 shadow-lg"
+            className="absolute right-0 z-20 mt-1.5 min-w-[8.5rem] overflow-hidden rounded-md border border-borders bg-bg-cards py-1 shadow-lg"
           >
             {LANGUAGES.map((option) => {
               const active = option === lang;
@@ -185,8 +185,8 @@ function LanguageSwitch() {
                     }}
                     className={`flex w-full items-center gap-2 px-3 py-1.5 text-left text-sm transition-colors ${
                       active
-                        ? "bg-nahida-500/15 font-semibold text-lang-selected"
-                        : "text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100"
+                        ? "bg-bg-button/15 font-semibold text-text-black"
+                        : "text-text-black hover:bg-borders hover:text-text-black"
                     }`}
                   >
                     <span className="flex-1">
@@ -234,7 +234,7 @@ function ChevronDownIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="h-3 w-3 text-zinc-500"
+      className="h-3 w-3 text-text-black"
       aria-hidden="true"
     >
       <path d="m6 9 6 6 6-6" />

@@ -39,6 +39,11 @@ export type ProgressListener = (progress: ImportProgress) => void;
 export interface ImportResult {
   /** Wishes that are genuinely new to the existing local history. */
   wishes: Wish[];
+  /**
+   * Every normalized wish fetched in this run, including ones already present
+   * locally. Used by the import confirmation to fully replace an account.
+   */
+  fetchedWishes: Wish[];
   addedCount: number;
   /** Wishes that already existed locally before this import. */
   alreadyCount: number;
@@ -54,6 +59,8 @@ export interface ImportResult {
 
 interface BannerResult {
   wishes: Wish[];
+  /** Every normalized, non-duplicate wish seen for this banner. */
+  fetchedWishes: Wish[];
   addedCount: number;
   alreadyCount: number;
   duplicateCount: number;
@@ -76,6 +83,7 @@ export async function importWishHistory(
   onProgress?: ProgressListener
 ): Promise<ImportResult> {
   const wishes: Wish[] = [];
+  const fetchedWishes: Wish[] = [];
   const errors: string[] = [];
   const skippedGachaTypes: string[] = [];
   let addedCount = 0;
@@ -95,6 +103,7 @@ export async function importWishHistory(
     );
 
     wishes.push(...result.wishes);
+    fetchedWishes.push(...result.fetchedWishes);
     addedCount += result.addedCount;
     alreadyCount += result.alreadyCount;
     duplicateCount += result.duplicateCount;
@@ -112,6 +121,7 @@ export async function importWishHistory(
 
   return {
     wishes,
+    fetchedWishes,
     addedCount,
     alreadyCount,
     duplicateCount,
@@ -130,6 +140,7 @@ async function importBanner(
 ): Promise<BannerResult> {
   const seenThisRun = new Set<string>();
   const wishes: Wish[] = [];
+  const fetchedWishes: Wish[] = [];
   let addedCount = 0;
   let alreadyCount = 0;
   let duplicateCount = 0;
@@ -181,6 +192,7 @@ async function importBanner(
       }
       seenThisRun.add(wish.id);
       newInPage += 1;
+      fetchedWishes.push(wish);
       if (existingIds.has(wish.id)) {
         alreadyCount += 1;
         continue;
@@ -208,6 +220,7 @@ async function importBanner(
 
   return {
     wishes,
+    fetchedWishes,
     addedCount,
     alreadyCount,
     duplicateCount,

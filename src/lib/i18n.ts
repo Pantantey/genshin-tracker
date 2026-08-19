@@ -29,6 +29,12 @@ export const messages = {
   "banner.standard": { en: "Standard Banner", es: "Banner estándar" },
   "banner.tabsLabel": { en: "Wish banner", es: "Banner de deseos" },
 
+  // Accounts (multi-account support)
+  "account.selectLabel": { en: "Accounts", es: "Cuentas" },
+  "account.editName": { en: "Edit account name", es: "Editar nombre de la cuenta" },
+  "account.nameInput": { en: "Account name", es: "Nombre de la cuenta" },
+  "account.addOrUpdate": { en: "Add or update", es: "Agregar o actualizar" },
+
   // Summary (Pity is never translated)
   "summary.aria": { en: "Summary", es: "Resumen" },
   "summary.pity4": { en: "4★ Pity", es: "4★ Pity" },
@@ -68,6 +74,16 @@ export const messages = {
     en: "No pulls match this filter yet.",
     es: "Aún no hay tiradas que coincidan con este filtro.",
   },
+  // Ko-fi support
+  "ko-fi.title": {
+    en: "Is Genshin-Info.site useful to you?",
+    es: "¿Te resulta útil Genshin-Info.site?",
+  },
+  "ko-fi.body": {
+    en: "It's free and your data stays local. If you want to help me keep the project updated and keep adding features, you can support it on Ko-fi.",
+    es: "Es gratis y tus datos se mantienen localmente. Si quieres ayudarme a mantener el proyecto actualizado y seguir agregando funciones, puedes apoyarlo en Ko-fi.",
+  },
+  "ko-fi.link": { en: "Support Genshin-Info.site on Ko-fi", es: "Apoya Genshin-Info.site en Ko-fi" },
   // Footer
   "footer.resources": { en: "Resources", es: "Recursos" },
   "footer.disclaimer": {
@@ -78,12 +94,6 @@ export const messages = {
   "footer.donate": { en: "Donate via PayPal", es: "Donar vía PayPal" },
   "footer.coffee": { en: "Buy me a coffee", es: "Invítame un café" },
   "footer.contact": { en: "Contact", es: "Contacto" },
-  "footer.tagline": {
-    en:
-      "genshintracker is an unofficial fan-made website for Genshin Impact. All game assets and trademarks belong to their respective owners.",
-    es:
-      "genshintracker es un sitio no oficial hecho por fans de Genshin Impact. Todos los recursos y marcas del juego pertenecen a sus respectivos dueños.",
-  },
 
   // Import page
   "import.title": { en: "Import Wish History", es: "Importar historial de deseos" },
@@ -171,6 +181,19 @@ export const messages = {
   "form.warnings": { en: "warnings", es: "avisos" },
   "form.duringImport": { en: "during import:", es: "durante la importación:" },
   "form.failed": { en: "Import failed.", es: "Error de importación." },
+  "form.newAccountTitle": { en: "New account", es: "Cuenta nueva" },
+  "form.newAccountBody": {
+    en: "UID {uid}. Do you want to add it to your tracker?",
+    es: "UID {uid}. ¿Desea agregarla al rastreador?",
+  },
+  "form.accountExistsTitle": { en: "Account already exists", es: "Cuenta ya existente" },
+  "form.accountExistsBody": {
+    en: "UID {uid}. Do you want to update it?",
+    es: "UID {uid}. ¿Desea actualizarla?",
+  },
+  "form.add": { en: "Add", es: "Agregar" },
+  "form.update": { en: "Update", es: "Actualizar" },
+  "form.cancel": { en: "Cancel", es: "Cancelar" },
 
   // Copy button
   "copy.script": { en: "Copy script", es: "Copiar script" },

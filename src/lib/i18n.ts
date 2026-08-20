@@ -135,7 +135,7 @@ export const messages = {
   },
   "import.here": { en: "here", es: "aquí" },
   "import.scriptAria": { en: "Helper script to copy", es: "Script de ayuda para copiar" },
-  "import.step5Title": { en: "Check what the script does ***OPTIONAL***", es: "Comprueba qué hace el script ***OPCIONAL***" },
+  "import.step5Title": { en: "OPTIONAL: Check what the script does.", es: "OPCIONAL: Comprueba qué hace el script." },
   "import.step5Body": {
     en: "Ask ChatGPT or another trusted AI whether this script is safe or could be harmful or dangerous to run before using it.",
     es: "Pregunta a ChatGPT u otra IA de confianza si este script es seguro o si podría ser dañino o peligroso de ejecutar antes de usarlo.",

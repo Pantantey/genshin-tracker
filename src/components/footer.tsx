@@ -55,10 +55,6 @@ export function Footer() {
 
 
       </div>
-
-      <div className="mx-auto mt-8 max-w-4xl border-t border-borders pt-4 text-center">
-        <p className="text-sm font-medium text-text-black">&copy; 2026 Genshin-Info.site</p>
-      </div>
     </footer>
   );
 }

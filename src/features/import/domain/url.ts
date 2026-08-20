@@ -14,7 +14,6 @@
  */
 
 const GLOBAL_HOST = "public-operation-hk4e-sg.hoyoverse.com";
-const CHINA_HOST = "public-operation-hk4e.mihoyo.com";
 
 export const GACHA_LOG_PATH = "gacha_info/api/getGachaLog";
 
@@ -56,10 +55,8 @@ export function parseGachaUrlParts(sourceUrl: string): GachaUrlParts {
     );
   }
 
-  const gameBiz = params.get("game_biz") ?? "";
-  const region = params.get("region") ?? "";
-  const isChina = gameBiz.includes("cn") || region.startsWith("cn");
-  const host = isChina ? CHINA_HOST : GLOBAL_HOST;
+  // Only the Global server is supported: the operation host is fixed.
+  const host = GLOBAL_HOST;
 
   return { host, params, sourceUrl };
 }

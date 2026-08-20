@@ -9,13 +9,12 @@ import { GACHA_LOG_PATH } from "@/features/import/domain/url";
  * as `*.vercel.app`. This route performs the request server-side (Node, no
  * CORS) and mirrors the JSON response to the client.
  *
- * Not an open proxy: only the two known operation hosts and the exact
+ * Not an open proxy: only the known global operation host and the exact
  * `getGachaLog` path are allowed.
  */
 
 const ALLOWED_HOSTS = new Set([
   "public-operation-hk4e-sg.hoyoverse.com",
-  "public-operation-hk4e.mihoyo.com",
 ]);
 
 export const runtime = "nodejs";

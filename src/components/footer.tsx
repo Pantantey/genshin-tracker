@@ -41,8 +41,8 @@ export function Footer() {
           </h2>
           <ul className="mt-2 space-y-1 text-sm text-text-black">
             <li>
-              <a href="mailto:andrey99fr@gmail.com" className="text-placeholder transition-colors hover:text-link-hover">
-                Andrey99fr@gmail.com
+              <a href="mailto:GenshinInfoSite@gmail.com" className="text-placeholder transition-colors hover:text-link-hover">
+                GenshinInfoSite@gmail.com
               </a>
             </li>
             <li>

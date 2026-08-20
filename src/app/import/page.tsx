@@ -76,7 +76,7 @@ export default function ImportPage() {
           <p className="mt-2">
             {t("import.step4Before")}{" "}
             <a
-              href="https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235"
+              href="https://gist.github.com/Pantantey/18c3abfc51fe97f14552474aef4efbee"
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium text-links underline underline-offset-2 hover:text-links"

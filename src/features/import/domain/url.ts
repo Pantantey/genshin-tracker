@@ -1,18 +1,3 @@
-/**
- * Build the HoYoVerse `getGachaLog` request URL from the wish-history URL the
- * user obtains with the external helper script.
- *
- * The pasted URL may be either an API URL or the webview URL with parameters
- * in its hash fragment. We pick out the auth material and reconstruct the
- * canonical operation URL, mirroring Paimon.moe's importer:
- *
- * - `end_id` (optional cursor) is the LAST wish id of the previous page. It is
- *   what actually makes the endpoint return older pulls — `page` alone is
- *   ignored by the server.
- * - `auth_appid`, `init_type` and `device_type` are required/standard params.
- * - `lang` is sent twice (`en` and `en-us`), as Paimon.moe does.
- */
-
 const GLOBAL_HOST = "public-operation-hk4e-sg.hoyoverse.com";
 
 export const GACHA_LOG_PATH = "gacha_info/api/getGachaLog";

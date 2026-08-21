@@ -1,28 +1,5 @@
 import type { WishItemType } from "./wish";
 
-/**
- * Icon resolution for wish items.
- *
- * Imported names are English (the importer requests `lang=en`), and Paimon.moe's
- * image CDN follows a deterministic slug: lowercase, non-alphanumerics become
- * `_`. This is identical for characters and weapons, so icons are RESOLVED
- * AUTOMATICALLY from the English name — no hand-maintained roster needed.
- *
- * - Character: https://paimon.moe/images/characters/{slug}.png
- * - Weapon:    https://paimon.moe/images/weapons/{slug}.png
- *
- * Icons are served from the project's own `/icons/{type}/{slug}.png` assets
- * (see `scripts/cache-icons.mjs`). No external CDN calls happen at runtime;
- * instead of the CDN, images are self-hosted statics.
- *
- * Two small maps remain:
- * - Slug exceptions for names that don't derive cleanly (verified against data).
- * - Legacy aliases for OLD imports that stored Spanish/accented names.
- *
- * Spanish (accented) names can't be slugified, so they only resolve through the
- * legacy aliases. Anything unresolved falls back to initials via `itemInitials`.
- */
-
 const CHARACTER_BASE = "/icons/characters";
 const WEAPON_BASE = "/icons/weapons";
 
@@ -32,7 +9,6 @@ const CHARACTER_SLUG_EXCEPTIONS: Record<string, string> = {};
 /** Weapon slugs that cannot be derived from the English name. */
 const WEAPON_SLUG_EXCEPTIONS: Record<string, string> = {
   "Ultimate Overlord's Mega Magic Sword": "ultimate_overlords_mega_magic_sword",
-  // Paimon.moe uses a hyphen (not underscore) between these two words.
   "Mountain-Bracing Bolt": "mountain-bracing_bolt",
 };
 
@@ -63,12 +39,6 @@ const LEGACY_ALIASES: Record<string, string> = {
   "Prototipo Lanza": "prototype_starglitter",
 };
 
-/**
- * Derive a paimon.moe slug from an English name (e.g. "Kujou Sara" ->
- * "kujou_sara", "Traveler (Pyro)" -> "traveler_pyro"). Existing hyphens in the
- * name are preserved ("Freedom-Sworn" -> "freedom-sworn"), matching how the
- * catalog names those items.
- */
 export function slugifyName(name: string): string {
   return name
     .toLowerCase()
@@ -103,10 +73,7 @@ function lookupIn(
   return undefined;
 }
 
-/**
- * Resolve the paimon.moe icon URL for a wish, or `null` when the item is not
- * known (so callers can show a fallback).
- */
+
 export function getItemIcon(
   name: string,
   itemType: WishItemType | null

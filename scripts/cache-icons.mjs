@@ -1,25 +1,4 @@
 #!/usr/bin/env node
-/**
- * Cache Genshin wish-history assets locally.
- *
- * Fetches the CURRENT character/weapon catalog from Paimon.moe's data files
- * (so new characters are picked up automatically), then downloads each icon
- * from the Paimon.moe image CDN into `public/icons/{type}/{slug}.png`.
- *
- * Additionally, it downloads the FULL character portrait (non-event artwork)
- * into `public/full/characters/{slug}.png`, matching the path the banner
- * summary uses (`/full/characters/...`). We only cache full characters, since
- * Paimon.moe has no equivalent full artwork for weapons.
- *
- * Incremental: files that already exist are skipped.
- *
- * Run from the project root:
- *   node scripts/cache-icons.mjs
- *
- * Requires no dependencies. If the catalog cannot be fetched (offline/CDN
- * blocked), the script fails loudly instead of silently caching nothing.
- */
-
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";

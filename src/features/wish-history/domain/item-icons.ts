@@ -69,7 +69,7 @@ const LEGACY_ALIASES: Record<string, string> = {
  * name are preserved ("Freedom-Sworn" -> "freedom-sworn"), matching how the
  * catalog names those items.
  */
-function slugifyName(name: string): string {
+export function slugifyName(name: string): string {
   return name
     .toLowerCase()
     .replace(/'/g, "")

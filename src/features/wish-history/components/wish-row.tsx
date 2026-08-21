@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import type { Wish } from "../domain/wish";
 import { getItemIcon, itemInitials } from "../domain/item-icons";
 import { RarityBadge } from "./rarity-badge";
+import { getCharacterBuildUrl } from "@/features/builds/domain/characters";
 
 export interface WishRowProps {
   wish: Wish;
@@ -14,14 +16,12 @@ export interface WishRowProps {
 export function WishRow({ wish, pity }: WishRowProps) {
   const isFiveStar = wish.rarity === 5;
   const iconUrl = getItemIcon(wish.name, wish.itemType);
-  return (
-    <li
-      className={`grid grid-cols-[4.5rem_3rem_1fr_4rem_9rem] items-center gap-4 rounded-md border px-3 py-2 ${
-        isFiveStar
-          ? "border-border-5-star/40 bg-bg-5-star"
-          : "border-borders bg-bg-cards/40"
-      }`}
-    >
+  // Only characters link to their build page; weapons stay non-clickable.
+  const buildUrl =
+    wish.itemType === "character" ? getCharacterBuildUrl(wish.name) : null;
+
+  const cells = (
+    <>
       <span className="justify-self-center">
         <RarityBadge rarity={wish.rarity} />
       </span>
@@ -41,6 +41,28 @@ export function WishRow({ wish, pity }: WishRowProps) {
       <span className="text-center text-xs tabular-nums text-text-black">
         {formatDateTime(wish.timestamp)}
       </span>
+    </>
+  );
+
+  return (
+    <li
+      className={`grid grid-cols-[4.5rem_3rem_1fr_4rem_9rem] items-center gap-4 rounded-md border px-3 py-2 ${
+        isFiveStar
+          ? "border-border-5-star/40 bg-bg-5-star"
+          : "border-borders bg-bg-cards/40"
+      }`}
+    >
+      {buildUrl ? (
+        <Link
+          href={buildUrl}
+          className="contents"
+          aria-label={`${wish.name} build page`}
+        >
+          {cells}
+        </Link>
+      ) : (
+        cells
+      )}
     </li>
   );
 }

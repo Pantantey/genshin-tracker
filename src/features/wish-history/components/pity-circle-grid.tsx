@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import type { Wish } from "../domain/wish";
 import { getItemIcon, itemInitials } from "../domain/item-icons";
 import { useLanguage } from "@/hooks/use-language";
+import { getCharacterBuildUrl } from "@/features/builds/domain/characters";
 
 type RarityFilter = "all" | 4 | 5;
 
@@ -138,15 +140,18 @@ function PityCircle({ wish, pity }: { wish: Wish; pity?: number }) {
   const iconUrl = getItemIcon(wish.name, wish.itemType);
   const showIcon = iconUrl !== null && !broken;
   const pityValue = pity ?? 0;
+  // Only characters open their build page; weapons stay non-clickable.
+  const buildUrl =
+    wish.itemType === "character" ? getCharacterBuildUrl(wish.name) : null;
 
-  return (
+  const circle = (
     <div
       className={`relative flex h-16 w-16 items-center justify-center rounded-full border-2 ${
         isFive
           ? "border-border-5-star bg-bg-5-star"
           : "border-rarity-4-star bg-rarity-4-star/10"
       }`}
-      title={wish.name}
+      title={capitalizeName(wish.name)}
     >
       {showIcon ? (
         // eslint-disable-next-line @next/next/no-img-element
@@ -176,6 +181,18 @@ function PityCircle({ wish, pity }: { wish: Wish; pity?: number }) {
       </span>
     </div>
   );
+
+  return buildUrl ? (
+    <Link
+      href={buildUrl}
+      className="block transition-transform hover:scale-105"
+      title={capitalizeName(wish.name)}
+    >
+      {circle}
+    </Link>
+  ) : (
+    circle
+  );
 }
 
 /**
@@ -192,6 +209,13 @@ function pityColorClass(rarity: Wish["rarity"], pity: number): string {
   if (pity <= 3) return "bg-emerald-500";
   if (pity <= 7) return "bg-orange-500";
   return "bg-red-500";
+}
+
+function capitalizeName(name: string): string {
+  return name
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 }
 
 /**

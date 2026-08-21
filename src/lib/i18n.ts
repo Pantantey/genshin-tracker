@@ -22,6 +22,39 @@ export const messages = {
   "header.themeToDark": { en: "Switch to dark mode", es: "Cambiar a modo oscuro" },
   "header.themeToLight": { en: "Switch to light mode", es: "Cambiar a modo claro" },
   "header.import": { en: "Import", es: "Importar" },
+  "header.builds": { en: "Builds", es: "Builds" },
+
+  // Builds page
+  "builds.title": { en: "Builds", es: "Builds" },
+  "builds.tabsLabel": { en: "Build sections", es: "Secciones del build" },
+  "builds.filterElement": { en: "Element", es: "Elemento" },
+  "builds.filterWeapon": { en: "Weapon type", es: "Tipo de arma" },
+  "builds.search": { en: "Search by name", es: "Buscar por nombre" },
+  "builds.all": { en: "All", es: "Todos" },
+  "builds.empty": { en: "No characters match these filters.", es: "Ningún personaje coincide con estos filtros." },
+  "builds.element": { en: "Element", es: "Elemento" },
+  "builds.weaponType": { en: "Weapon", es: "Arma" },
+  "builds.comingSoon": { en: "Coming soon", es: "Proximamente" },
+  "builds.tab.character": { en: "Character", es: "Personaje" },
+  "builds.tab.weapons": { en: "Best Weapons", es: "Mejores Armas" },
+  "builds.tab.artifacts": { en: "Artifacts & Stats", es: "Artefactos y Stats" },
+  "builds.tab.talents": { en: "Talents", es: "Talentos" },
+
+  // Elements
+  "element.anemo": { en: "Anemo", es: "Anemo" },
+  "element.cryo": { en: "Cryo", es: "Cryo" },
+  "element.dendro": { en: "Dendro", es: "Dendro" },
+  "element.electro": { en: "Electro", es: "Electro" },
+  "element.geo": { en: "Geo", es: "Geo" },
+  "element.hydro": { en: "Hydro", es: "Hydro" },
+  "element.pyro": { en: "Pyro", es: "Pyro" },
+
+  // Weapon types
+  "weapon.bow": { en: "Bow", es: "Arco" },
+  "weapon.catalyst": { en: "Catalyst", es: "Catalizador" },
+  "weapon.claymore": { en: "Claymore", es: "Mandoble" },
+  "weapon.polearm": { en: "Polearm", es: "Lanza" },
+  "weapon.sword": { en: "Sword", es: "Espada" },
 
   // Banners
   "banner.character": { en: "Character Banner", es: "Banner de personaje" },

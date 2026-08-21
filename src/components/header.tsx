@@ -18,6 +18,7 @@ export function Header() {
   const { t } = useLanguage();
   const pathname = usePathname();
   const onImport = pathname === "/import";
+  const onBuilds = pathname === "/builds" || pathname.startsWith("/builds/");
 
   return (
     <header className="sticky top-0 z-20 border-b border-borders bg-bg-cards/70 backdrop-blur">
@@ -40,9 +41,20 @@ export function Header() {
         <nav className="flex items-center gap-3" aria-label={t("header.nav")}>
           <ThemeSwitch theme={theme} onToggle={toggleTheme} />
           <Link
+            href="/builds"
+            aria-current={onBuilds ? "page" : undefined}
+            className={`ms-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+              onBuilds
+                ? "bg-bg-button text-text-white"
+                : "text-text-black hover:bg-borders hover:text-text-black"
+            }`}
+          >
+            {t("header.builds")}
+          </Link>
+          <Link
             href="/import"
             aria-current={onImport ? "page" : undefined}
-            className={`mx-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+            className={`me-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
               onImport
                 ? "bg-bg-button text-text-white"
                 : "text-text-black hover:bg-borders hover:text-text-black"

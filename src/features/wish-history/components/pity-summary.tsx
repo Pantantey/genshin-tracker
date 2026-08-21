@@ -1,11 +1,21 @@
 "use client";
 
+import Link from "next/link";
 import type { BannerType } from "../domain/banner";
 import {
   BANNER_ASSETS,
   BANNER_FEATURED_ITEMS,
   getFeaturedItemUrl,
 } from "../domain/banner-assets";
+import { CHARACTER_BANNER_NAME } from "../domain/banner-names";
+import { WEAPON_BANNER_NAME } from "../domain/banner-names";
+import { WEAPON_BANNER_NAME_2 } from "../domain/banner-names";
+import { getWeaponBannerDisplayName } from "../domain/banner-names";
+import { getCharacterInfo } from "@/features/builds/domain/characters";
+import {
+  getElementIcon,
+  getWeaponTypeIcon,
+} from "@/features/builds/domain/build-icons";
 import type { RarityPityResult } from "../domain/pity";
 import type { OutcomeResult } from "../domain/outcome";
 import { useLanguage } from "@/hooks/use-language";
@@ -39,21 +49,45 @@ export function PitySummary({
       }`}
     >
       <div className="relative shrink-0">
+        {banner === "character" && (
+          <div className="mb-3 flex items-center justify-center gap-3">
+            <CharacterBannerHeading />
+          </div>
+        )}
         {BANNER_ASSETS[banner].image2 ? (
           <div className="flex items-start gap-2 pl-[3em]">
+            <div className="flex w-[200px] flex-col items-center gap-1">
+              <p className="truncate text-sm font-semibold text-text-black">
+                {getWeaponBannerDisplayName(WEAPON_BANNER_NAME)}
+              </p>
+              {/* eslint-disable-next-line @next/next/no-img-element -- local banner asset */}
+              <img
+                src={BANNER_ASSETS[banner].image}
+                alt=""
+                className="h-[200px] w-[200px] max-w-full object-contain"
+              />
+            </div>
+            <div className="flex w-[200px] flex-col items-center gap-1">
+              <p className="truncate text-sm font-semibold text-text-black">
+                {getWeaponBannerDisplayName(WEAPON_BANNER_NAME_2)}
+              </p>
+              {/* eslint-disable-next-line @next/next/no-img-element -- local banner asset */}
+              <img
+                src={BANNER_ASSETS[banner].image2}
+                alt=""
+                className="h-[200px] w-[200px] max-w-full object-contain"
+              />
+            </div>
+          </div>
+        ) : banner === "character" ? (
+          <Link href={`/builds/${CHARACTER_BANNER_NAME}`} className="block">
             {/* eslint-disable-next-line @next/next/no-img-element -- local banner asset */}
             <img
               src={BANNER_ASSETS[banner].image}
               alt={t(`banner.${banner}` as TranslationKey)}
-              className="h-[200px] w-[200px] max-w-full object-contain"
+              className="h-[400px] w-[540px] max-w-full object-contain transition-transform hover:scale-[1.02]"
             />
-            {/* eslint-disable-next-line @next/next/no-img-element -- local banner asset */}
-            <img
-              src={BANNER_ASSETS[banner].image2}
-              alt=""
-              className="h-[200px] w-[200px] max-w-full object-contain"
-            />
-          </div>
+          </Link>
         ) : (
           // eslint-disable-next-line @next/next/no-img-element -- local banner asset
           <img
@@ -67,20 +101,33 @@ export function PitySummary({
             aria-hidden="true"
             className="absolute right-2 top-1/2 flex -translate-y-1/2 flex-col gap-3"
           >
-            {BANNER_FEATURED_ITEMS[banner].map((slug) => (
-              <span
-                key={slug}
-                title={slug}
-                className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border-2 border-rarity-4-star bg-bg-rarity-4-star/80"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element -- local static asset */}
-                <img
-                  src={getFeaturedItemUrl(banner, slug)}
-                  alt=""
-                  className="h-16 w-16 rounded-full object-cover"
-                />
-              </span>
-            ))}
+            {BANNER_FEATURED_ITEMS[banner].map((slug) => {
+              const circle = (
+                <span className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border-2 border-rarity-4-star bg-bg-rarity-4-star/80">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- local static asset */}
+                  <img
+                    src={getFeaturedItemUrl(banner, slug)}
+                    alt=""
+                    className="h-16 w-16 rounded-full object-cover"
+                  />
+                </span>
+              );
+              // Only the Character banner's featured 4★ open their build page.
+              return banner === "character" ? (
+                <Link
+                  key={slug}
+                  href={`/builds/${slug}`}
+                  title={slug}
+                  className="block transition-transform hover:scale-105"
+                >
+                  {circle}
+                </Link>
+              ) : (
+                <span key={slug} title={slug} className="block">
+                  {circle}
+                </span>
+              );
+            })}
           </div>
         )}
       </div>
@@ -107,5 +154,40 @@ function SummaryItem({ label, value }: { label: string; value: string }) {
       </dt>
       <dd className="mt-1 text-base font-medium text-text-black">{value}</dd>
     </div>
+  );
+}
+
+/**
+ * Heading shown above the Character banner image on the home page: the featured
+ * character's name with its element icon on the left and weapon-type icon on
+ * the right, matching the Character tab of the per-character build page.
+ */
+function CharacterBannerHeading() {
+  const { t } = useLanguage();
+  const character = getCharacterInfo(CHARACTER_BANNER_NAME);
+  if (!character) {
+    return null;
+  }
+
+  return (
+    <>
+      {/* eslint-disable-next-line @next/next/no-img-element -- local static asset */}
+      <img
+        src={getElementIcon(character.element)}
+        alt={t(`element.${character.element}` as TranslationKey)}
+        title={t(`element.${character.element}` as TranslationKey)}
+        className="element-icon h-8 w-8 shrink-0 object-contain"
+      />
+      <h2 className="text-2xl font-semibold text-text-black">
+        {character.name}
+      </h2>
+      {/* eslint-disable-next-line @next/next/no-img-element -- local static asset */}
+      <img
+        src={getWeaponTypeIcon(character.weaponType)}
+        alt={t(`weapon.${character.weaponType}` as TranslationKey)}
+        title={t(`weapon.${character.weaponType}` as TranslationKey)}
+        className="h-8 w-8 shrink-0 object-contain"
+      />
+    </>
   );
 }

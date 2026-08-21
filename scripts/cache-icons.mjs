@@ -1,10 +1,16 @@
 #!/usr/bin/env node
 /**
- * Cache Genshin wish-history icons locally.
+ * Cache Genshin wish-history assets locally.
  *
  * Fetches the CURRENT character/weapon catalog from Paimon.moe's data files
  * (so new characters are picked up automatically), then downloads each icon
  * from the Paimon.moe image CDN into `public/icons/{type}/{slug}.png`.
+ *
+ * Additionally, it downloads the FULL character portrait (non-event artwork)
+ * into `public/full/characters/{slug}.png`, matching the path the banner
+ * summary uses (`/full/characters/...`). We only cache full characters, since
+ * Paimon.moe has no equivalent full artwork for weapons.
+ *
  * Incremental: files that already exist are skipped.
  *
  * Run from the project root:
@@ -21,6 +27,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const ICONS_DIR = path.join(ROOT, "public", "icons");
+const FULL_CHARACTERS_DIR = path.join(ROOT, "public", "full", "characters");
 
 const DATA_BASE =
   "https://raw.githubusercontent.com/MadeBaruna/paimon-moe/main/src/data";
@@ -59,7 +66,16 @@ async function fetchCatalog(file) {
 
 /** Download one icon; returns true on success. */
 async function downloadIcon(slug, type, target) {
-  const url = `${CDN}/${type}/${slug}.png`;
+  return downloadImage(`${CDN}/${type}/${slug}.png`, target);
+}
+
+/** Download a character's full portrait into `public/full/characters`. */
+async function downloadFullCharacter(slug, target) {
+  return downloadImage(`${CDN}/characters/full/${slug}.png`, target);
+}
+
+/** Fetch one image and write it to disk; returns true on success. */
+async function downloadImage(url, target) {
   let response;
   try {
     response = await fetch(url, {
@@ -87,6 +103,7 @@ async function downloadIcon(slug, type, target) {
 async function main() {
   await fs.mkdir(path.join(ICONS_DIR, "characters"), { recursive: true });
   await fs.mkdir(path.join(ICONS_DIR, "weapons"), { recursive: true });
+  await fs.mkdir(FULL_CHARACTERS_DIR, { recursive: true });
 
   const catalogErrors = [];
   const items = [];
@@ -144,8 +161,49 @@ async function main() {
 
   await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
 
+  // --- Full character portraits (public/full/characters) ---
+  // Cache the full, non-event artwork for every character in the catalog.
+  const characterSlugs = items
+    .filter((item) => item.type === "characters")
+    .map((item) => item.slug);
+
+  let fullDownloaded = 0;
+  let fullSkipped = 0;
+  let fullFailed = 0;
+  const fullFailedList = [];
+
+  let fullIndex = 0;
+  async function fullWorker() {
+    while (true) {
+      const current = fullIndex++;
+      if (current >= characterSlugs.length) {
+        return;
+      }
+      const slug = characterSlugs[current];
+      const target = path.join(FULL_CHARACTERS_DIR, `${slug}.png`);
+      try {
+        await fs.access(target);
+        fullSkipped += 1;
+      } catch {
+        if (await downloadFullCharacter(slug, target)) {
+          fullDownloaded += 1;
+        } else {
+          fullFailed += 1;
+          fullFailedList.push(slug);
+        }
+      }
+    }
+  }
+
+  await Promise.all(
+    Array.from({ length: CONCURRENCY }, () => fullWorker())
+  );
+
   console.log(
     `\nDone — downloaded: ${downloaded}, already present: ${skipped}, failed: ${failed}`
+  );
+  console.log(
+    `Full characters — downloaded: ${fullDownloaded}, already present: ${fullSkipped}, failed: ${fullFailed}`
   );
   if (catalogErrors.length > 0) {
     console.log("Catalog warnings (continued anyway):");
@@ -158,6 +216,13 @@ async function main() {
     console.log(failedList.slice(0, 50).join(", "));
     if (failedList.length > 50) {
       console.log(`  … and ${failedList.length - 50} more`);
+    }
+  }
+  if (fullFailedList.length > 0) {
+    console.log("Failed full portraits (not on the CDN for these characters):");
+    console.log(fullFailedList.slice(0, 50).join(", "));
+    if (fullFailedList.length > 50) {
+      console.log(`  … and ${fullFailedList.length - 50} more`);
     }
   }
 }

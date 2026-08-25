@@ -9,7 +9,7 @@ import { useLanguage } from "@/hooks/use-language";
  * reviewed on the linked gist before running it.
  */
 export const COPY_SCRIPT =
-  "Set-ExecutionPolicy Bypass -Scope Process -Force; [Net.ServicePointManager]::SecurityProtocol=([Net.ServicePointManager]::SecurityProtocol -bor 3072); $u='https://gist.githubusercontent.com/Pantantey/18c3abfc51fe97f14552474aef4efbee/raw/historyImporter.ps1'; $t=$env:TEMP+'\\gwt-imp.ps1'; Invoke-WebRequest -Uri $u -UseBasicParsing -OutFile $t; & $t";
+  "Set-ExecutionPolicy Bypass -Scope Process -Force; [Net.ServicePointManager]::SecurityProtocol=([Net.ServicePointManager]::SecurityProtocol -bor 3072); $u='https://gist.githubusercontent.com/Pantantey/6896024aa2d4ac24cf4625802b5f4a5f/raw/historyImporter.ps1'; $t=$env:TEMP+'\\gwt-imp.ps1'; Invoke-WebRequest -Uri $u -UseBasicParsing -OutFile $t; & $t";
 
 export function CopyScriptButton() {
   const { t } = useLanguage();

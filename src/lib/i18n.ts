@@ -338,6 +338,10 @@ export const messages = {
     en: "Paste the script from step 4 into the PowerShell window and press Enter.",
     es: "Pega el script del paso 4 en la ventana de PowerShell y pulsa Enter.",
   },
+  "import.step7Note": {
+    en: "Note: the script checks the newest cached links over the network and copies the first one that answers OK. If it shows a “server busy” message, wait 1-2 minutes and run it again.",
+    es: "Nota: el script comprueba los enlaces más recientes de la caché por red y copia el primero que responde OK. Si muestra un mensaje de “servidor ocupado”, espera 1-2 minutos y vuelve a ejecutarlo.",
+  },
   "import.step8Title": { en: "Paste the link here", es: "Pega el enlace aquí" },
   "import.step8Body": {
     en: "PowerShell returns a wish-history link and copies it to your clipboard automatically. Just paste it (Ctrl+V) in the field below, then click Import.",

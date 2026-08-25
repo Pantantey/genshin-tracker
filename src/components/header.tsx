@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme, type Theme } from "@/hooks/use-theme";
@@ -156,9 +156,38 @@ function MoonIcon() {
 function LanguageSwitch() {
   const { lang, setLang, t } = useLanguage();
   const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Close the dropdown when the user clicks anywhere outside it (or presses
+  // Escape). Uses a document-level listener instead of a fixed backdrop:
+  // backdrops break inside an ancestor with `backdrop-filter` (the header),
+  // where `position: fixed` is scoped to that ancestor instead of the viewport.
+  useEffect(() => {
+    if (!open) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const container = containerRef.current;
+      if (container && event.target instanceof Node && !container.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={containerRef}>
       <button
         type="button"
         aria-haspopup="listbox"
@@ -173,44 +202,36 @@ function LanguageSwitch() {
       </button>
 
       {open && (
-        <>
-          {/* Click-outside backdrop */}
-          <div
-            aria-hidden="true"
-            onClick={() => setOpen(false)}
-            className="fixed inset-0 z-10"
-          />
-          <ul
-            role="listbox"
-            aria-label={t("header.language")}
-            className="absolute right-0 z-20 mt-1.5 min-w-[8.5rem] overflow-hidden rounded-md border border-borders bg-bg-cards py-1 shadow-lg"
-          >
-            {LANGUAGES.map((option) => {
-              const active = option === lang;
-              return (
-                <li key={option} role="option" aria-selected={active}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setLang(option);
-                      setOpen(false);
-                    }}
-                    className={`flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-sm transition-colors ${
-                      active
-                        ? "bg-bg-button/15 font-semibold text-text-black"
-                        : "text-text-black hover:bg-borders hover:text-text-black"
-                    }`}
-                  >
-                    <span className="flex-1">
-                      {option === "en" ? "English" : "Español"}
-                    </span>
-                    {active && <CheckIcon />}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </>
+        <ul
+          role="listbox"
+          aria-label={t("header.language")}
+          className="absolute right-0 z-20 mt-1.5 min-w-[8.5rem] overflow-hidden rounded-md border border-borders bg-bg-cards py-1 shadow-lg"
+        >
+          {LANGUAGES.map((option) => {
+            const active = option === lang;
+            return (
+              <li key={option} role="option" aria-selected={active}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLang(option);
+                    setOpen(false);
+                  }}
+                  className={`flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-sm transition-colors ${
+                    active
+                      ? "bg-bg-button/15 font-semibold text-text-black"
+                      : "text-text-black hover:bg-borders hover:text-text-black"
+                  }`}
+                >
+                  <span className="flex-1">
+                    {option === "en" ? "English" : "Español"}
+                  </span>
+                  {active && <CheckIcon />}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
       )}
     </div>
   );

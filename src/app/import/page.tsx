@@ -87,7 +87,7 @@ export default function ImportPage() {
           <p className="mt-2">
             {t("import.step4Before")}{" "}
             <a
-              href="https://gist.github.com/Pantantey/18c3abfc51fe97f14552474aef4efbee"
+              href="https://gist.github.com/Pantantey/6896024aa2d4ac24cf4625802b5f4a5f"
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium text-links underline underline-offset-2 hover:text-links"
@@ -108,6 +108,7 @@ export default function ImportPage() {
 
         <Step number={7} title={t("import.step7Title")}>
           <p>{t("import.step7Body")}</p>
+          <p className="mt-2 text-xs text-text-black/80">{t("import.step7Note")}</p>
         </Step>
 
         <Step number={8} title={t("import.step8Title")}>

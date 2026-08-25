@@ -1,6 +1,13 @@
 import Link from "next/link";
 import type { CharacterInfo } from "../domain/characters";
 
+/** Background of the portrait area, matching the rarity circles on the main page. */
+function rarityBackground(rarity: string): string {
+  if (rarity === "5") return "bg-bg-5-star";
+  if (rarity === "4") return "bg-rarity-4-star/10";
+  return "bg-bg-button";
+}
+
 /** Compact character card: full portrait on top, name below. */
 export function CharacterCard({ character }: { character: CharacterInfo }) {
   return (
@@ -8,7 +15,11 @@ export function CharacterCard({ character }: { character: CharacterInfo }) {
       href={`/builds/${character.slug}`}
       className="group overflow-hidden rounded-lg border border-borders bg-bg-cards/50 transition-colors hover:border-borders hover:bg-bg-cards"
     >
-      <div className="aspect-[3/4] w-full overflow-hidden bg-bg-button">
+      <div
+        className={`aspect-[3/4] w-full overflow-hidden ${rarityBackground(
+          character.rarity
+        )}`}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element -- local static asset */}
         <img
           src={character.image}

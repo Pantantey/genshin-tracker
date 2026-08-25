@@ -1,5 +1,6 @@
 import { getItemIcon } from "../../wish-history/domain/item-icons";
 import type { Element, WeaponType } from "../data/characters-data";
+import type { Theme } from "@/hooks/use-theme";
 
 /**
  * Icon resolution for the builds feature.
@@ -44,4 +45,39 @@ export function getElementIcon(element: Element): string {
 /** Weapon type icon URL (e.g. "/icons/weapon-types/Icon_Sword.png"). */
 export function getWeaponTypeIcon(weaponType: WeaponType): string {
   return `/icons/weapon-types/Icon_${WEAPON_TYPE_ICONS[weaponType]}.png`;
+}
+
+/** Artifact set icon URL from the file name in `public/icons/artifacts`. */
+export function getArtifactIcon(file: string): string {
+  return file ? `/icons/artifacts/${file}` : "";
+}
+
+/**
+ * Derive a short display name for an artifact set from its image file name,
+ * e.g. "scholar.webp" -> "scholar", "archaic_petra.webp" -> "archaic petra".
+ * Underscores are replaced with spaces so the name reads naturally.
+ */
+export function getArtifactName(file: string): string {
+  const base = file.split(".")[0] ?? file;
+  return base.replaceAll("_", " ");
+}
+
+/** Artifact "piece" whose icon is theme-dependent (Sands / Goblet / Circlet). */
+export type StatPiece = "sand" | "caliz" | "crown";
+
+/** Icon URL for a themed artifact piece, e.g. "/icons/artifacts/sand-light.png". */
+export function getStatPieceIcon(piece: StatPiece, theme: Theme): string {
+  const variant = theme === "light" ? "light" : "dark";
+  return `/icons/artifacts/${piece}-${variant}.png`;
+}
+
+/** Talent slot type: the elemental skill or the burst (ultimate). */
+export type TalentKind = "elemental" | "burst";
+
+/**
+ * Talent icon URL for a character, e.g. "/icons/talents/odette-elemental.png".
+ * The file may not exist; callers fall back to a placeholder on error.
+ */
+export function getTalentIcon(slug: string, kind: TalentKind): string {
+  return `/icons/talents/${slug}-${kind}.png`;
 }

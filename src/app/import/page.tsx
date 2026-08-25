@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
+import { Modal } from "@/components/modal";
 import {
   COPY_SCRIPT,
   CopyScriptButton,
@@ -10,6 +11,7 @@ import { ImportForm } from "@/features/import/components/import-form";
 import { useWishHistory } from "@/features/wish-history/hooks/use-wish-history";
 import { getWishRepository } from "@/features/wish-history/services/indexed-db-repository";
 import { useLanguage } from "@/hooks/use-language";
+import type { TranslationKey } from "@/lib/i18n";
 
 /**
  * Step-by-step guide to import a Genshin Impact wish history. The import
@@ -19,6 +21,7 @@ import { useLanguage } from "@/hooks/use-language";
 export default function ImportPage() {
   const { t } = useLanguage();
   const controller = useWishHistory(getWishRepository());
+  const [faqOpen, setFaqOpen] = useState(false);
 
   const existingIds = useMemo(
     () => new Set(controller.wishes.map((w) => w.id)),
@@ -45,6 +48,14 @@ export default function ImportPage() {
       <p className="mt-3 text-sm font-medium text-text-black">
         {t("import.reminderNotice")}
       </p>
+
+      <button
+        type="button"
+        onClick={() => setFaqOpen(true)}
+        className="mt-3 rounded-md border border-borders bg-bg-cards/60 px-3 py-1.5 text-sm font-medium text-text-black transition-colors hover:bg-borders hover:text-text-black"
+      >
+        {t("import.faq" as TranslationKey)}
+      </button>
 
       <p className="mt-3 text-sm text-text-black">
         {t("import.subtitle")}
@@ -118,7 +129,38 @@ export default function ImportPage() {
           </Link>
         </Step>
       </ol>
+
+      <Modal
+        open={faqOpen}
+        title={t("import.faqTitle" as TranslationKey)}
+        onClose={() => setFaqOpen(false)}
+      >
+        <div className="space-y-4">
+          <FaqItem
+            question={t("import.faqQ1" as TranslationKey)}
+            answer={t("import.faqA1" as TranslationKey)}
+          />
+          <FaqItem
+            question={t("import.faqQ2" as TranslationKey)}
+            answer={t("import.faqA2" as TranslationKey)}
+          />
+          <FaqItem
+            question={t("import.faqQ3" as TranslationKey)}
+            answer={t("import.faqA3" as TranslationKey)}
+          />
+        </div>
+      </Modal>
     </main>
+  );
+}
+
+/** One question/answer pair inside the FAQ modal. */
+function FaqItem({ question, answer }: { question: string; answer: string }) {
+  return (
+    <div>
+      <h3 className="text-sm font-semibold text-text-black">{question}</h3>
+      <p className="mt-1 text-sm leading-relaxed text-text-black/90">{answer}</p>
+    </div>
   );
 }
 

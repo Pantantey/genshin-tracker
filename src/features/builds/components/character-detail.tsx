@@ -2,13 +2,15 @@
 
 import { useState } from "react";
 import type { CharacterInfo } from "../domain/characters";
-import type { WeaponData } from "../data/characters-data";
+import type { WeaponData } from "../data/weapons-data";
 import {
   getElementIcon,
   getWeaponTypeIcon,
 } from "../domain/build-icons";
 import { BuildTabs, type BuildTab } from "./build-tabs";
 import { BestWeapons } from "./best-weapons";
+import { ArtifactsStats } from "./artifacts-stats";
+import { TalentsStats } from "./talents-stats";
 import { useLanguage } from "@/hooks/use-language";
 import type { TranslationKey } from "@/lib/i18n";
 
@@ -56,7 +58,7 @@ export function CharacterDetail({
                     src={getWeaponTypeIcon(character.weaponType)}
                     alt={t(`weapon.${character.weaponType}` as TranslationKey)}
                     title={t(`weapon.${character.weaponType}` as TranslationKey)}
-                    className="h-8 w-8 shrink-0 object-contain"
+                    className="element-icon h-8 w-8 shrink-0 object-contain"
                   />
                 </div>
 
@@ -72,9 +74,9 @@ export function CharacterDetail({
 
             {tab === "weapons" && <BestWeapons weapons={weapons} />}
 
-            {(tab === "artifacts" || tab === "talents") && (
-              <div className="min-h-[240px]" />
-            )}
+            {tab === "artifacts" && <ArtifactsStats character={character} />}
+
+            {tab === "talents" && <TalentsStats character={character} />}
           </>
         )}
       </div>

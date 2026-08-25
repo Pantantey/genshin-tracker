@@ -18,6 +18,9 @@
   --tab-inactive-bg: #2a395a;
   --bg-icons: #041520;
 
+  /* Recommended stats table background (dark) */
+  --recommended-bg: #1d273b;
+
   /* Interactive */
   --links: #27bde2;
   --bg-button: #175c6d;
@@ -63,6 +66,7 @@
   --color-bg-icons: var(--bg-icons);
   --color-bg-5-star: var(--bg-5-star);
   --color-tab-inactive-bg: var(--tab-inactive-bg);
+  --color-recommended-bg: var(--recommended-bg);
   --color-links: var(--links);
   --color-bg-button: var(--bg-button);
   --color-link-hover: var(--link-hover);
@@ -103,6 +107,9 @@
   --bg-5-star: rgba(235, 133, 31, 0.08);
   --tab-inactive-bg: #deedff;
   --bg-icons: #9ec8ff;
+
+  /* Recommended stats table background (light) */
+  --recommended-bg: #fbfdfc;
 
   /* Interactive */
   --links: #0c2ef0;
@@ -145,4 +152,26 @@ body {
 /* In light mode the element icon gets a subtle drop shadow for contrast. */
 .light .element-icon {
   filter: drop-shadow(0 1px 0.5px rgba(127, 127, 127, 1));
+}
+
+/* In light mode the talent icons get a subtle drop shadow for contrast. */
+.light .talent-icon {
+  filter: drop-shadow(0 2px 2px rgba(127, 127, 127, 1));
+}
+
+/* "Best Option" badge: gentle infinite scale pulse for the first weapon. */
+@keyframes best-option-pulse {
+  0%,
+  100% {
+    transform: scale(1) rotate(-12deg);
+  }
+  50% {
+    transform: scale(1.12) rotate(-12deg);
+  }
+}
+
+.best-option-badge {
+  transform-origin: top left;
+  animation: best-option-pulse 1.6s ease-in-out infinite;
+  transform: rotate(-12deg);
 }

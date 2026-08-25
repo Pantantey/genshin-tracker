@@ -18,7 +18,7 @@ export function Header() {
   const { t } = useLanguage();
   const pathname = usePathname();
   const onImport = pathname === "/import";
-  const onBuilds = pathname === "/builds" || pathname.startsWith("/builds/");
+  const onBuilds = pathname === "/builds";
 
   return (
     <header className="sticky top-0 z-20 border-b border-borders bg-bg-cards/70 backdrop-blur">

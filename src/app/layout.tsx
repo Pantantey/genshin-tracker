@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Genshin-Info.site",
-  description: "Import, store and analyze your Genshin Impact wish history locally.",
+  description: "Track your Genshin Impact journey. Analyze your wish history and explore optimized character builds, weapons, and artifact recommendations.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -12,10 +12,10 @@ import { WEAPON_BANNER_NAME } from "../domain/banner-names";
 import { WEAPON_BANNER_NAME_2 } from "../domain/banner-names";
 import { getWeaponBannerDisplayName } from "../domain/banner-names";
 import { getCharacterInfo } from "@/features/builds/domain/characters";
-import {
-  getElementIcon,
-  getWeaponTypeIcon,
-} from "@/features/builds/domain/build-icons";
+import { getCharacterBuildUrl } from "@/features/builds/domain/characters";
+import { getElementIcon } from "@/features/builds/domain/build-icons";
+import { getWeaponTypeIcon } from "@/features/builds/domain/build-icons";
+import { capitalizeName } from "../domain/format";
 import type { RarityPityResult } from "../domain/pity";
 import type { OutcomeResult } from "../domain/outcome";
 import { useLanguage } from "@/hooks/use-language";
@@ -113,17 +113,19 @@ export function PitySummary({
                 </span>
               );
               // Only the Character banner's featured 4★ open their build page.
-              return banner === "character" ? (
+              const buildUrl = getCharacterBuildUrl(slug);
+              const displayName = capitalizeName(slug);
+              return banner === "character" && buildUrl ? (
                 <Link
                   key={slug}
-                  href={`/builds/${slug}`}
-                  title={slug}
+                  href={buildUrl}
+                  title={displayName}
                   className="block transition-transform hover:scale-105"
                 >
                   {circle}
                 </Link>
               ) : (
-                <span key={slug} title={slug} className="block">
+                <span key={slug} title={displayName} className="block">
                   {circle}
                 </span>
               );
@@ -186,7 +188,7 @@ function CharacterBannerHeading() {
         src={getWeaponTypeIcon(character.weaponType)}
         alt={t(`weapon.${character.weaponType}` as TranslationKey)}
         title={t(`weapon.${character.weaponType}` as TranslationKey)}
-        className="h-8 w-8 shrink-0 object-contain"
+        className="element-icon h-8 w-8 shrink-0 object-contain"
       />
     </>
   );

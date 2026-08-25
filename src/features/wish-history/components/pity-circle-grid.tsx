@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import type { Wish } from "../domain/wish";
 import { getItemIcon, itemInitials } from "../domain/item-icons";
+import { capitalizeName } from "../domain/format";
 import { useLanguage } from "@/hooks/use-language";
 import { getCharacterBuildUrl } from "@/features/builds/domain/characters";
 
@@ -209,13 +210,6 @@ function pityColorClass(rarity: Wish["rarity"], pity: number): string {
   if (pity <= 3) return "bg-emerald-500";
   if (pity <= 7) return "bg-orange-500";
   return "bg-red-500";
-}
-
-function capitalizeName(name: string): string {
-  return name
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
 }
 
 /**

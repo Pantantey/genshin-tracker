@@ -11,9 +11,9 @@
 export const CHARACTER_BANNER_NAME = "odette";
 
 export const CHARACTER_FEATURED_ITEMS: string[] = [
-  "Alyosha",
-  "Sucrose",
-  "Lynette",
+  "alyosha",
+  "sucrose",
+  "lynette",
 ];
 
 /** Weapon Event Wish — main weapon. */

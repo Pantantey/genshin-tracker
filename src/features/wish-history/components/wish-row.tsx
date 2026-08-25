@@ -6,6 +6,9 @@ import type { Wish } from "../domain/wish";
 import { getItemIcon, itemInitials } from "../domain/item-icons";
 import { RarityBadge } from "./rarity-badge";
 import { getCharacterBuildUrl } from "@/features/builds/domain/characters";
+import { getWeaponNameKey } from "@/features/builds/domain/build-icons";
+import { useLanguage } from "@/hooks/use-language";
+import type { TranslationKey } from "@/lib/i18n";
 
 export interface WishRowProps {
   wish: Wish;
@@ -14,11 +17,17 @@ export interface WishRowProps {
 }
 
 export function WishRow({ wish, pity }: WishRowProps) {
+  const { t } = useLanguage();
   const isFiveStar = wish.rarity === 5;
   const iconUrl = getItemIcon(wish.name, wish.itemType);
   // Only characters link to their build page; weapons stay non-clickable.
   const buildUrl =
     wish.itemType === "character" ? getCharacterBuildUrl(wish.name) : null;
+  // Localize weapon names; characters keep their original (untranslated) name.
+  const weaponNameKey =
+    wish.itemType === "weapon" ? getWeaponNameKey(wish.name) : undefined;
+  const displayLabel =
+    weaponNameKey != null ? t(weaponNameKey as TranslationKey) : wish.name;
 
   const cells = (
     <>
@@ -33,7 +42,7 @@ export function WishRow({ wish, pity }: WishRowProps) {
           isFiveStar ? "font-semibold text-wish-name" : "text-text-black"
         }`}
       >
-        {wish.name}
+        {displayLabel}
       </p>
       <span className="text-center text-xs tabular-nums text-text-black">
         {typeof pity === "number" ? pity : ""}

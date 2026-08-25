@@ -1,4 +1,5 @@
 import { getItemIcon } from "../../wish-history/domain/item-icons";
+import { getWeaponData } from "../data/weapons-data";
 import type { Element, WeaponType } from "../data/characters-data";
 import type { Theme } from "@/hooks/use-theme";
 
@@ -35,6 +36,15 @@ const WEAPON_TYPE_ICONS: Record<WeaponType, string> = {
 /** Icon URL for a weapon by its name, or null when it cannot be resolved. */
 export function getWeaponIcon(name: string): string | null {
   return getItemIcon(name, "weapon");
+}
+
+/**
+ * i18n key for a weapon's display name, or undefined when the weapon is not in
+ * the registry (e.g. characters or unknown items). Used to localize weapon
+ * names in the wish history and banner.
+ */
+export function getWeaponNameKey(name: string): string | undefined {
+  return getWeaponData(name)?.nameKey;
 }
 
 /** Element icon URL (e.g. "/icons/elements/Element_Pyro.png"). */

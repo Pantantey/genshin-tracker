@@ -7,6 +7,8 @@ import { getItemIcon, itemInitials } from "../domain/item-icons";
 import { capitalizeName } from "../domain/format";
 import { useLanguage } from "@/hooks/use-language";
 import { getCharacterBuildUrl } from "@/features/builds/domain/characters";
+import { getWeaponNameKey } from "@/features/builds/domain/build-icons";
+import type { TranslationKey } from "@/lib/i18n";
 
 type RarityFilter = "all" | 4 | 5;
 
@@ -136,11 +138,19 @@ export function PityCircleGrid({
 }
 
 function PityCircle({ wish, pity }: { wish: Wish; pity?: number }) {
+  const { t } = useLanguage();
   const isFive = wish.rarity === 5;
   const [broken, setBroken] = useState(false);
   const iconUrl = getItemIcon(wish.name, wish.itemType);
   const showIcon = iconUrl !== null && !broken;
   const pityValue = pity ?? 0;
+  // Localize weapon tooltips; characters keep their capitalized original name.
+  const weaponNameKey =
+    wish.itemType === "weapon" ? getWeaponNameKey(wish.name) : undefined;
+  const tooltip =
+    weaponNameKey != null
+      ? t(weaponNameKey as TranslationKey)
+      : capitalizeName(wish.name);
   // Only characters open their build page; weapons stay non-clickable.
   const buildUrl =
     wish.itemType === "character" ? getCharacterBuildUrl(wish.name) : null;
@@ -152,7 +162,7 @@ function PityCircle({ wish, pity }: { wish: Wish; pity?: number }) {
           ? "border-border-5-star bg-bg-5-star"
           : "border-rarity-4-star bg-rarity-4-star/10"
       }`}
-      title={capitalizeName(wish.name)}
+      title={tooltip}
     >
       {showIcon ? (
         // eslint-disable-next-line @next/next/no-img-element
@@ -187,7 +197,7 @@ function PityCircle({ wish, pity }: { wish: Wish; pity?: number }) {
     <Link
       href={buildUrl}
       className="block transition-transform hover:scale-105"
-      title={capitalizeName(wish.name)}
+      title={tooltip}
     >
       {circle}
     </Link>

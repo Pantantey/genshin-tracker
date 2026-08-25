@@ -15,11 +15,22 @@ import { getCharacterInfo } from "@/features/builds/domain/characters";
 import { getCharacterBuildUrl } from "@/features/builds/domain/characters";
 import { getElementIcon } from "@/features/builds/domain/build-icons";
 import { getWeaponTypeIcon } from "@/features/builds/domain/build-icons";
+import { getWeaponNameKey } from "@/features/builds/domain/build-icons";
 import { capitalizeName } from "../domain/format";
 import type { RarityPityResult } from "../domain/pity";
 import type { OutcomeResult } from "../domain/outcome";
 import { useLanguage } from "@/hooks/use-language";
 import type { TranslationKey } from "@/lib/i18n";
+
+/** Localized display name for a Weapon banner weapon slug. */
+function localizeWeaponBannerName(
+  slug: string,
+  t: (key: TranslationKey) => string
+): string {
+  const english = getWeaponBannerDisplayName(slug);
+  const key = getWeaponNameKey(english);
+  return key ? t(key as TranslationKey) : english;
+}
 
 export interface PitySummaryProps {
   banner: BannerType;
@@ -58,7 +69,7 @@ export function PitySummary({
           <div className="flex items-start gap-2 pl-[3em]">
             <div className="flex w-[200px] flex-col items-center gap-1">
               <p className="truncate text-sm font-semibold text-text-black">
-                {getWeaponBannerDisplayName(WEAPON_BANNER_NAME)}
+                {localizeWeaponBannerName(WEAPON_BANNER_NAME, t)}
               </p>
               {/* eslint-disable-next-line @next/next/no-img-element -- local banner asset */}
               <img
@@ -69,7 +80,7 @@ export function PitySummary({
             </div>
             <div className="flex w-[200px] flex-col items-center gap-1">
               <p className="truncate text-sm font-semibold text-text-black">
-                {getWeaponBannerDisplayName(WEAPON_BANNER_NAME_2)}
+                {localizeWeaponBannerName(WEAPON_BANNER_NAME_2, t)}
               </p>
               {/* eslint-disable-next-line @next/next/no-img-element -- local banner asset */}
               <img

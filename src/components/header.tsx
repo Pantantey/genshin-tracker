@@ -165,7 +165,7 @@ function LanguageSwitch() {
         aria-expanded={open}
         aria-label={t("header.language")}
         onClick={() => setOpen((o) => !o)}
-        className="flex h-7 items-center gap-1.5 rounded-md border border-borders bg-bg-cards/60 px-2 text-sm font-medium text-text-black transition-colors hover:bg-borders hover:text-text-black"
+        className="flex h-7 cursor-pointer items-center gap-1.5 rounded-md border border-borders bg-bg-cards/60 px-2 text-sm font-medium text-text-black transition-colors hover:bg-borders hover:text-text-black"
       >
         <GlobeIcon />
         <span className="uppercase">{lang}</span>
@@ -195,7 +195,7 @@ function LanguageSwitch() {
                       setLang(option);
                       setOpen(false);
                     }}
-                    className={`flex w-full items-center gap-2 px-3 py-1.5 text-left text-sm transition-colors ${
+                    className={`flex w-full cursor-pointer items-center gap-2 px-3 py-1.5 text-left text-sm transition-colors ${
                       active
                         ? "bg-bg-button/15 font-semibold text-text-black"
                         : "text-text-black hover:bg-borders hover:text-text-black"

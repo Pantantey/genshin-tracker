@@ -118,7 +118,7 @@ export function ImportForm({
           type="button"
           onClick={handleImport}
           disabled={importing || url.trim().length === 0}
-          className="rounded-md bg-bg-button px-4 py-2 text-sm font-medium text-text-white transition-colors hover:bg-bg-button disabled:cursor-not-allowed disabled:opacity-50"
+          className="cursor-pointer rounded-md bg-bg-button px-4 py-2 text-sm font-medium text-text-white transition-colors hover:bg-bg-button disabled:cursor-not-allowed disabled:opacity-50"
         >
           {importing ? t("form.importing") : t("form.import")}
         </button>
@@ -193,11 +193,7 @@ export function ImportForm({
           aria-labelledby="import-dialog-title"
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
         >
-          <div
-            aria-hidden="true"
-            onClick={cancelPending}
-            className="absolute inset-0 bg-black/60"
-          />
+          <div aria-hidden="true" className="absolute inset-0 bg-black/60" />
           <div className="relative w-full max-w-md rounded-lg border border-borders bg-bg-cards p-5 shadow-xl">
             <h3 id="import-dialog-title" className="font-semibold text-text-black">
               {pending.kind === "newAccount"

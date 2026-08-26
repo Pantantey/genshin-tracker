@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { GoogleAnalytics } from "@/components/google-analytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <script> would be a hydratable script tag inside the React tree
             (React 19 does not execute scripts rendered as children). */}
         <Header />
+        <GoogleAnalytics />
         {children}
         <Footer />
         <Analytics />

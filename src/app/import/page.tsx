@@ -52,7 +52,7 @@ export default function ImportPage() {
       <button
         type="button"
         onClick={() => setFaqOpen(true)}
-        className="mt-3 rounded-md border border-borders bg-bg-cards/60 px-3 py-1.5 text-sm font-medium text-text-black transition-colors hover:bg-borders hover:text-text-black"
+        className="mt-3 cursor-pointer rounded-md border border-borders bg-bg-cards/60 px-3 py-1.5 text-sm font-medium text-text-black transition-colors hover:bg-borders hover:text-text-black"
       >
         {t("import.faq" as TranslationKey)}
       </button>

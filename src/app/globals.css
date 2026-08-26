@@ -175,3 +175,34 @@ body {
   animation: best-option-pulse 1.6s ease-in-out infinite;
   transform: rotate(-12deg);
 }
+
+/* Homepage hero CTA buttons. Both CTAs share one look that adapts to the
+   active theme: solid brand button in light mode, subtle card outline in the
+   default dark palette. This is the single declarative style behind the
+   "Explore character builds" and "Import wish history" links. */
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 0.375rem;
+  border: 1px solid var(--borders);
+  background-color: var(--bg-cards);
+  color: var(--text-black);
+  transition:
+    background-color 150ms,
+    color 150ms,
+    border-color 150ms;
+}
+
+.hero-cta:hover {
+  background-color: var(--borders);
+}
+
+.light .hero-cta {
+  border-color: transparent;
+  background-color: var(--bg-button);
+  color: var(--text-white);
+}
+
+.light .hero-cta:hover {
+  opacity: 0.9;
+}

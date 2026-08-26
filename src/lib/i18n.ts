@@ -199,6 +199,16 @@ export const messages = {
   "summary.fiftyFifty": { en: "50/50", es: "50/50" },
 
   // Home / wish history
+  "home.heroTitle": {
+    en: "Genshin Impact Wish Tracker & Pity Calculator",
+    es: "Rastreador de deseos y calculadora de Pity de Genshin Impact",
+  },
+  "home.heroBody": {
+    en: "Track your Genshin Impact wish history, follow your 5-star and 4-star pity across every banner, and review your pull statistics — all stored privately in your browser. Explore character builds with recommended weapons, artifacts and stats.",
+    es: "Sigue tu historial de deseos de Genshin Impact, controla tu Pity de 5 y 4 estrellas en cada banner y revisa tus estadísticas de tiradas — todo guardado de forma privada en tu navegador. Explora builds de personajes con armas, artefactos y stats recomendados.",
+  },
+  "home.heroBuilds": { en: "Explore character builds", es: "Explorar builds de personajes" },
+  "home.heroImport": { en: "Import wish history", es: "Importar historial de deseos" },
   "home.loading": { en: "Loading wish history…", es: "Cargando historial de deseos…" },
   "home.emptyTitle": { en: "No wish history yet", es: "Aún no hay historial de deseos" },
   "home.emptyBefore": { en: "Head to the", es: "Ve a la" },

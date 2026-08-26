@@ -82,9 +82,25 @@ export default function Home() {
 
   return (
     <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-8">
-      {/* The brand name is now rendered by the global Header; keep an
-          accessible page heading for screen readers / SEO. */}
-      <h1 className="sr-only">Genshin-Info.site</h1>
+      {/* Descriptive hero with real, indexable text (keywords: wish tracker,
+          pity calculator, build guides). The brand name also lives in the
+          global Header; this visible H1 carries the search intent. */}
+      <section aria-labelledby="home-hero-title" className="mt-2 mb-6">
+        <h1 id="home-hero-title" className="text-2xl font-semibold text-text-black">
+          {t("home.heroTitle")}
+        </h1>
+        <p className="mt-3 max-w-none text-sm leading-relaxed text-text-black">
+          {t("home.heroBody")}
+        </p>
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          <Link href="/builds" className="hero-cta px-3 py-1.5 text-sm font-medium">
+            {t("home.heroBuilds")}
+          </Link>
+          <Link href="/import" className="hero-cta px-3 py-1.5 text-sm font-medium">
+            {t("home.heroImport")}
+          </Link>
+        </div>
+      </section>
 
       <div className="mt-6 space-y-4">
         {controller.status === "loading" && (

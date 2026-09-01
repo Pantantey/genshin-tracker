@@ -116,6 +116,21 @@ export const messages = {
   "weapons.tidal_shadow.mainStat": { en: "ATK 41.3%", es: "ATQ 41.3%" },
   "weapons.tidal_shadow.secondaryStat": { en: "ATK 510", es: "ATQ 510" },
   "weapons.tidal_shadow.description": { en: "After receiving healing, the wielder's ATK increases.", es: "Tras recibir curación, el portador aumenta su Ataque." },
+  "weapons.fractured_halo.mainStat": { en: "CRIT DMG 66.2%", es: "DAÑO CRÍTICO 66.2%" },
+  "weapons.fractured_halo.secondaryStat": { en: "ATK 608", es: "ATQ 608" },
+  "weapons.fractured_halo.description": { en: "Using the Elemental or Ultimate Skill increases your Attack. Creating a shield increases the damage of Lunar Charge for the entire team.", es: "Al usar la Habilidad Elemental o Definitiva, aumenta su Ataque. Si crea un escudo aumenta el daño de Electrocargado Lunar de todo el equipo." },
+  "weapons.bloodsoaked_ruins.mainStat": { en: "CRIT RATE 22.1%", es: "PROB. CRÍTICO 22.1%" },
+  "weapons.bloodsoaked_ruins.secondaryStat": { en: "ATK 674", es: "ATQ 674" },
+  "weapons.bloodsoaked_ruins.description": { en: "By using the Ultimate Ability, the wielder increases their damage with Lunar Electrocharge, increases their Critical Damage, and recovers elemental energy.", es: "Al usar la Habilidad Definitiva, el portador aumenta su daño con Eletrocargado Lunar, aumenta su Daño Crítico y recupera energía elemental." },
+  "weapons.blackcliff_pole.mainStat": { en: "CRIT DMG 55.1%", es: "DAÑO CRÍTICO 55.1%" },
+  "weapons.blackcliff_pole.secondaryStat": { en: "ATK 510", es: "ATQ 510" },
+  "weapons.blackcliff_pole.description": { en: "After defeating an enemy, ATK is increases.", es: "Después de derrotar a un enemigo, el ATK aumenta." },
+  "weapons.prospector's_shovel.mainStat": { en: "ATK 41.3%", es: "ATQ 41.3%" },
+  "weapons.prospector's_shovel.secondaryStat": { en: "ATK 510", es: "ATQ 510" },
+  "weapons.prospector's_shovel.description": { en: "Increases the damage of Electrocharged and Lunar Electrocharged.", es: "Aumenta el daño de Electrocargado y de Electrocargado Lunar." },
+  "weapons.ballad_of_the_fjords.mainStat": { en: "CRIT RATE 27.6%", es: "PROB. CRÍTICA 27.6%" },
+  "weapons.ballad_of_the_fjords.secondaryStat": { en: "ATK 510", es: "ATQ 510" },
+  "weapons.ballad_of_the_fjords.description": { en: "When there are at least 3 different Elemental Types in your party, Elemental Mastery increases.", es: "Cuando hay al menos 3 diferentes tipos elementales en tu equipo, la maestria elemental aumenta." },
 
   // Weapon names
   "weapons.absolution.name": { en: "Absolution", es: "Expiadora" },
@@ -139,6 +154,11 @@ export const messages = {
   "weapons.redhorn_stonethresher.name": { en: "Redhorn Stonethresher", es: "Espadón Cornirrojo" },
   "weapons.mailed_flower.name": { en: "Mailed Flower", es: "Fierro Floriornado" },
   "weapons.tidal_shadow.name": { en: "Tidal Shadow", es: "Sombra de la Marea" },
+  "weapons.fractured_halo.name": { en: "Fractured Halo", es: "Halo Fracturado" },
+  "weapons.bloodsoaked_ruins.name": { en: "Bloodsoaked Ruins", es: "Ruinas Ensangrentadas" },
+  "weapons.blackcliff_pole.name": { en: "Blackcliff Pole", es: "Halo Fracturado" },
+  "weapons.prospector's_shovel.name": { en: "Prospector's Shovel", es: "Azada Excavatesoros" },
+  "weapons.ballad_of_the_fjords.name": { en: "Ballad of the Fjords", es: "Balada de los Fiordos" },
 
   // Artifacts
   "artifacts.scholar.twoPieceBonus": { en: "2 piece: ", es: "2 piezas: " },
@@ -151,6 +171,10 @@ export const messages = {
   "artifacts.heart_of_the_furnace.fourPieceBonus": { en: "4 piece: Increases the wielder's attack and boosts the stellar reaction damage of the whole team.", es: "4 piezas: Aumenta el ataque del portador y aumenta el daño de las reacciones estelares de todo el equipo." },
   "artifacts.Disenchantment_in_Deep_Shadow.twoPieceBonus": { en: "2 piece: Increases ATK by 18%", es: "2 piezas: Aumenta el ATQ en un 18%" },
   "artifacts.Disenchantment_in_Deep_Shadow.fourPieceBonus": { en: "4 piece: Increases Superconduct and Stellar Superconduct reaction damage.", es: "4 piezas: Aumenta el daño de la reacción de Superconductor y Superconductor Estelar." },
+  "artifacts.night_of_the_skys_unveiling.twoPieceBonus": { en: "2 piece: Increases EM by 80", es: "2 piezas: Aumenta maestría elemetal en 80" },
+  "artifacts.night_of_the_skys_unveiling.fourPieceBonus": { en: "4 piece: Increases damage when performing Lunar Reactions.", es: "4 piezas: Aumenta el daño al realizar Reacciones Lunares." },
+  "artifacts.aubade_of_morningstar_and_moon.twoPieceBonus": { en: "2 piece: Increases EM by 80", es: "2 piezas: Aumenta maestría elemetal en 80 pts" },
+  "artifacts.aubade_of_morningstar_and_moon.fourPieceBonus": { en: "4 piece: When the carrier is in the team but not in use, it increases its damage in Lunar Reactions.", es: "4 piezas: Cuando el portador está en el equipo pero no en uso, aumenta su daño en las Reacciones Lunares." },
 
   // Artifact names
   "artifacts.scholar.name": { en: "Scholar", es: "Erudito" },
@@ -158,6 +182,8 @@ export const messages = {
   "artifacts.fragment_of_harmonic_whimsy.name": { en: "Fragment of Harmonic Whimsy", es: "Fragmento de la Armonía Fantasiosa" },
   "artifacts.heart_of_the_furnace.name": { en: "Heart of the Furnace", es: "Corazón Forjado" },
   "artifacts.Disenchantment_in_Deep_Shadow.name": { en: "Disenchantment in Deep Shadow", es: "Desilusión Congelada en las Sombras" },
+  "artifacts.night_of_the_skys_unveiling.name": { en: "Night of the sky's unveiling", es: "Noche de la Revelación del Cielo" },
+  "artifacts.aubade_of_morningstar_and_moon.name": { en: "Aubade of Morningstar and Moon", es: "Alborada de la Estrella del Alba y la Luna" },
 
   // Elements
   "element.anemo": { en: "Anemo", es: "Anemo" },

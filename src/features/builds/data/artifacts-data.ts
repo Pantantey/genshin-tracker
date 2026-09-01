@@ -56,6 +56,20 @@ export const ARTIFACTS_DATA: Record<string, ArtifactData> = {
     twoPieceBonus: "artifacts.Disenchantment_in_Deep_Shadow.twoPieceBonus",
     fourPieceBonus: "artifacts.Disenchantment_in_Deep_Shadow.fourPieceBonus",
   },
+  night_of_the_skys_unveiling: {
+    key: "night_of_the_skys_unveiling",
+    nameKey: "artifacts.night_of_the_skys_unveiling.name",
+    files: ["night_of_the_skys_unveiling.webp", ""],
+    twoPieceBonus: "artifacts.night_of_the_skys_unveiling.twoPieceBonus",
+    fourPieceBonus: "artifacts.night_of_the_skys_unveiling.fourPieceBonus",
+  },
+  aubade_of_morningstar_and_moon: {
+    key: "aubade_of_morningstar_and_moon",
+    nameKey: "artifacts.aubade_of_morningstar_and_moon.name",
+    files: ["aubade_of_morningstar_and_moon.webp", ""],
+    twoPieceBonus: "artifacts.aubade_of_morningstar_and_moon.twoPieceBonus",
+    fourPieceBonus: "artifacts.aubade_of_morningstar_and_moon.fourPieceBonus",
+  },
 };
 
 /** Lookup an artifact set by its key. Returns undefined for unknown sets. */

@@ -191,6 +191,46 @@ export const WEAPONS_DATA: Record<string, WeaponData> = {
     secondaryStat: "weapons.tidal_shadow.secondaryStat",
     description: "weapons.tidal_shadow.description",
   },
+  "Fractured Halo": {
+    name: "Fractured Halo",
+    nameKey: "weapons.fractured_halo.name",
+    stars: 5,
+    mainStat: "weapons.fractured_halo.mainStat",
+    secondaryStat: "weapons.fractured_halo.secondaryStat",
+    description: "weapons.fractured_halo.description",
+  },
+  "Bloodsoaked Ruins": {
+    name: "Bloodsoaked Ruins",
+    nameKey: "weapons.bloodsoaked_ruins.name",
+    stars: 5,
+    mainStat: "weapons.bloodsoaked_ruins.mainStat",
+    secondaryStat: "weapons.bloodsoaked_ruins.secondaryStat",
+    description: "weapons.bloodsoaked_ruins.description",
+  },
+  "Blackcliff Pole": {
+    name: "Blackcliff Pole",
+    nameKey: "weapons.blackcliff_pole.name",
+    stars: 4,
+    mainStat: "weapons.blackcliff_pole.mainStat",
+    secondaryStat: "weapons.blackcliff_pole.secondaryStat",
+    description: "weapons.blackcliff_pole.description",
+  },
+  "Prospector's Shovel": {
+    name: "Prospector's Shovel",
+    nameKey: "weapons.prospector's_shovel.name",
+    stars: 4,
+    mainStat: "weapons.prospector's_shovel.mainStat",
+    secondaryStat: "weapons.prospector's_shovel.secondaryStat",
+    description: "weapons.prospector's_shovel.description",
+  },
+  "Ballad of the Fjords": {
+    name: "Ballad of the Fjords",
+    nameKey: "weapons.ballad_of_the_fjords.name",
+    stars: 4,
+    mainStat: "weapons.ballad_of_the_fjords.mainStat",
+    secondaryStat: "weapons.ballad_of_the_fjords.secondaryStat",
+    description: "weapons.ballad_of_the_fjords.description",
+  },
 };
 
 /** Lookup a weapon by its exact name. Returns undefined for unknown weapons. */

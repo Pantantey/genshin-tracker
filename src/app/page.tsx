@@ -6,6 +6,7 @@ import type { BannerType } from "@/features/wish-history/domain/banner";
 import { calculateOutcome } from "@/features/wish-history/domain/outcome";
 import { sortNewestFirst } from "@/features/wish-history/domain/order";
 import { calculateRarityPity } from "@/features/wish-history/domain/pity";
+import { isStandardPoolCharacter } from "@/features/wish-history/domain/standard-pool";
 import { useWishHistory } from "@/features/wish-history/hooks/use-wish-history";
 import { getWishRepository } from "@/features/wish-history/services/indexed-db-repository";
 import { AccountSwitcher } from "@/features/wish-history/components/account-switcher";
@@ -48,7 +49,8 @@ export default function Home() {
   );
 
   const outcome = useMemo(
-    () => calculateOutcome(accountWishes, selectedBanner),
+    () =>
+      calculateOutcome(accountWishes, selectedBanner, isStandardPoolCharacter),
     [accountWishes, selectedBanner]
   );
 

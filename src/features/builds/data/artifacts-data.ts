@@ -70,6 +70,20 @@ export const ARTIFACTS_DATA: Record<string, ArtifactData> = {
     twoPieceBonus: "artifacts.aubade_of_morningstar_and_moon.twoPieceBonus",
     fourPieceBonus: "artifacts.aubade_of_morningstar_and_moon.fourPieceBonus",
   },
+  scarlet_proof: {
+    key: "scarlet_proof",
+    nameKey: "artifacts.scarlet_proof.name",
+    files: ["scarlet_proof.webp", ""],
+    twoPieceBonus: "artifacts.scarlet_proof.twoPieceBonus",
+    fourPieceBonus: "artifacts.scarlet_proof.fourPieceBonus",
+  },
+  tenacity_of_the_millelith: {
+    key: "tenacity_of_the_millelith",
+    nameKey: "artifacts.tenacity_of_the_millelith.name",
+    files: ["tenacity_of_the_millelith.webp", ""],
+    twoPieceBonus: "artifacts.tenacity_of_the_millelith.twoPieceBonus",
+    fourPieceBonus: "artifacts.tenacity_of_the_millelith.fourPieceBonus",
+  },
 };
 
 /** Lookup an artifact set by its key. Returns undefined for unknown sets. */

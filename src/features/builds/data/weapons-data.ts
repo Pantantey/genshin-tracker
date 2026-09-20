@@ -231,6 +231,30 @@ export const WEAPONS_DATA: Record<string, WeaponData> = {
     secondaryStat: "weapons.ballad_of_the_fjords.secondaryStat",
     description: "weapons.ballad_of_the_fjords.description",
   },
+  "Beyond the Chrysalis": {
+    name: "Beyond the Chrysalis",
+    nameKey: "weapons.beyond_the_chrysalis.name",
+    stars: 5,
+    mainStat: "weapons.beyond_the_chrysalis.mainStat",
+    secondaryStat: "weapons.beyond_the_chrysalis.secondaryStat",
+    description: "weapons.beyond_the_chrysalis.description",
+  },
+  "Hymn of the Maelstorm": {
+    name: "Hymn of the Maelstorm",
+    nameKey: "weapons.hymn_of_the_maelstorm.name",
+    stars: 5,
+    mainStat: "weapons.hymn_of_the_maelstorm.mainStat",
+    secondaryStat: "weapons.hymn_of_the_maelstorm.secondaryStat",
+    description: "weapons.hymn_of_the_maelstorm.description",
+  },
+  "Thrilling Tales of Dragon Slayers": {
+    name: "Thrilling Tales of Dragon Slayers",
+    nameKey: "weapons.thrilling_Tales_of_dragon_slayers.name",
+    stars: 3,
+    mainStat: "weapons.thrilling_Tales_of_dragon_slayers.mainStat",
+    secondaryStat: "weapons.thrilling_Tales_of_dragon_slayers.secondaryStat",
+    description: "weapons.thrilling_Tales_of_dragon_slayers.description",
+  },
 };
 
 /** Lookup a weapon by its exact name. Returns undefined for unknown weapons. */

@@ -131,6 +131,15 @@ export const messages = {
   "weapons.ballad_of_the_fjords.mainStat": { en: "CRIT RATE 27.6%", es: "PROB. CRÍTICA 27.6%" },
   "weapons.ballad_of_the_fjords.secondaryStat": { en: "ATK 510", es: "ATQ 510" },
   "weapons.ballad_of_the_fjords.description": { en: "When there are at least 3 different Elemental Types in your party, Elemental Mastery increases.", es: "Cuando hay al menos 3 diferentes tipos elementales en tu equipo, la maestria elemental aumenta." },
+  "weapons.beyond_the_chrysalis.mainStat": { en: "CRIT DMG 44.1%", es: "DAÑO CRÍTICO 44.1%" },
+  "weapons.beyond_the_chrysalis.secondaryStat": { en: "ATK 674", es: "ATQ 674" },
+  "weapons.beyond_the_chrysalis.description": { en: "Each time the wielder uses their Elemental Skill or Elemental Burst, they gain one of the following effects in this order: increased CRIT DMG, Stellar Whirl, or energy regeneration.", es: "Cada vez que el portador usa la Habilidad Elemental o Definitiva gana uno de los siguientes efectos en este orden: aumenta el daño crítico, torbellino estelar o regenera energia." },
+  "weapons.hymn_of_the_maelstorm.mainStat": { en: "HP 66.2%", es: "VIDA 66.2%" },
+  "weapons.hymn_of_the_maelstorm.secondaryStat": { en: "ATK 542", es: "ATQ 542" },
+  "weapons.hymn_of_the_maelstorm.description": { en: "Improves the healing of the character equipping it, increases the active character's attack, and boosts these effects if the team triggers Stellar Reactions.", es: "Mejora la curación del personaje que lo lleva equipado, aumenta el ataque del personaje en uso y potencia estos efectos si el equipo activa Reacciones estelares." },
+  "weapons.thrilling_Tales_of_dragon_slayers.mainStat": { en: "HP 35.2%", es: "VIDA 35.2%" },
+  "weapons.thrilling_Tales_of_dragon_slayers.secondaryStat": { en: "ATK 401", es: "ATQ 401" },
+  "weapons.thrilling_Tales_of_dragon_slayers.description": { en: "When switching characters, the new character's attack increases.", es: "Al cambiar de personaje, el ataque del nuevo personaje aumenta." },
 
   // Weapon names
   "weapons.absolution.name": { en: "Absolution", es: "Expiadora" },
@@ -159,6 +168,9 @@ export const messages = {
   "weapons.blackcliff_pole.name": { en: "Blackcliff Pole", es: "Halo Fracturado" },
   "weapons.prospector's_shovel.name": { en: "Prospector's Shovel", es: "Azada Excavatesoros" },
   "weapons.ballad_of_the_fjords.name": { en: "Ballad of the Fjords", es: "Balada de los Fiordos" },
+  "weapons.beyond_the_chrysalis.name": { en: "Beyond the Chrysalis", es: "Allende la Crisálida" },
+  "weapons.hymn_of_the_maelstorm.name": { en: "Hymn of the Maelstorm", es: "Himno del Vórtice" },
+  "weapons.thrilling_Tales_of_dragon_slayers.name": { en: "Thrilling Tales of Dragon Slayers", es: "Cuentos de Cazadores de Dragones" },
 
   // Artifacts
   "artifacts.scholar.twoPieceBonus": { en: "2 piece: ", es: "2 piezas: " },
@@ -175,6 +187,10 @@ export const messages = {
   "artifacts.night_of_the_skys_unveiling.fourPieceBonus": { en: "4 piece: Increases damage when performing Lunar Reactions.", es: "4 piezas: Aumenta el daño al realizar Reacciones Lunares." },
   "artifacts.aubade_of_morningstar_and_moon.twoPieceBonus": { en: "2 piece: Increases EM by 80", es: "2 piezas: Aumenta maestría elemetal en 80 pts" },
   "artifacts.aubade_of_morningstar_and_moon.fourPieceBonus": { en: "4 piece: When the carrier is in the team but not in use, it increases its damage in Lunar Reactions.", es: "4 piezas: Cuando el portador está en el equipo pero no en uso, aumenta su daño en las Reacciones Lunares." },
+  "artifacts.scarlet_proof.twoPieceBonus": { en: "2 piece: Increases ATK by 18%", es: "2 piezas: Aumenta el Ataque en un 18%" },
+  "artifacts.scarlet_proof.fourPieceBonus": { en: "4 piece: When the wielder triggers a Stellar Swirl reaction, their CRIT Rate and Stellar Swirl DMG increase.", es: "4 piezas: Cuando el portador causa una reacción de Torbellino Estelar, aumenta su probabilidad crítica y su daño de Torbellino Estelar." },
+  "artifacts.tenacity_of_the_millelith.twoPieceBonus": { en: "2 piece: Increases HP by 20%", es: "2 piezas: Aumenta la Vida en un 20%" },
+  "artifacts.tenacity_of_the_millelith.fourPieceBonus": { en: "4 piece: When the Elemental Skill hits an enemy, it increases the entire team's ATK and shield strength.", es: "4 piezas: Cuando la Habilidad Elemental golpea a un enemigo, aumenta el ataque de todo el equipo y aumenta su protección de escudo." },
 
   // Artifact names
   "artifacts.scholar.name": { en: "Scholar", es: "Erudito" },
@@ -184,6 +200,8 @@ export const messages = {
   "artifacts.Disenchantment_in_Deep_Shadow.name": { en: "Disenchantment in Deep Shadow", es: "Desilusión Congelada en las Sombras" },
   "artifacts.night_of_the_skys_unveiling.name": { en: "Night of the sky's unveiling", es: "Noche de la Revelación del Cielo" },
   "artifacts.aubade_of_morningstar_and_moon.name": { en: "Aubade of Morningstar and Moon", es: "Alborada de la Estrella del Alba y la Luna" },
+  "artifacts.scarlet_proof.name": { en: "Scarlet Proof", es: "Testimonio Escarlata" },
+  "artifacts.tenacity_of_the_millelith.name": { en: "Tenacity of the Millelith", es: "Tenacidad de la Geoarmada" },
 
   // Elements
   "element.anemo": { en: "Anemo", es: "Anemo" },

@@ -149,10 +149,14 @@ export function PitySummary({
 
         <SummaryItem label={t("summary.pity4")} value={`${pity4.currentPity} / 10`} />
         <SummaryItem label={t("summary.pity5")} value={`${pity5.currentPity} / ${banner === "weapon" ? 80 : 90}`} />
-        <SummaryItem
-          label={t("summary.nextFive")}
-          value={outcome.currentState === "guaranteed" ? t("summary.guaranteed") : t("summary.fiftyFifty")}
-        />
+        {/* The next-5★ guarantee state is only meaningful for the Character
+            Event Wish, where the 50/50 mechanic applies. */}
+        {banner === "character" && (
+          <SummaryItem
+            label={t("summary.nextFive")}
+            value={outcome.currentState === "guaranteed" ? t("summary.guaranteed") : t("summary.fiftyFifty")}
+          />
+        )}
         <SummaryItem label={t("summary.totalWishes")} value={String(total)} />
       </div>
     </section>

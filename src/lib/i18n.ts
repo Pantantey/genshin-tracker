@@ -239,7 +239,7 @@ export const messages = {
   "summary.totalWishes": { en: "Total Wishes", es: "Total de deseos" },
   "summary.uid": { en: "UID", es: "UID" },
   "summary.lastUpdate": { en: "Last update", es: "Última actualización" },
-  "summary.guaranteed": { en: "Guaranteed featured", es: "Promo garantizado" },
+  "summary.guaranteed": { en: "Guaranteed", es: "Garantizado" },
   "summary.fiftyFifty": { en: "50/50", es: "50/50" },
 
   // Home / wish history
@@ -278,9 +278,14 @@ export const messages = {
   "pull.all": { en: "All", es: "Todas" },
   "pull.teasePrefix": { en: "You lost the 50/50 to", es: "Perdiste el 50/50 con" },
   "pull.teaseSuffix": {
-    en: "— but the next 5★ is guaranteed!",
-    es: "… ¡pero tu próximo 5★ está garantizado!",
+    en: "hahah but the next 5★ is guaranteed!",
+    es: "jajaj ¡pero tu próximo 5★ está garantizado!",
   },
+  "pull.luckyPrefix": {
+    en: "Another promotional character! Congrats on",
+    es: "¡Otro personaje promocional! Felicidades por",
+  },
+  "pull.luckySuffix": { en: " lucky guy!", es: " suertudo!" },
   "pull.empty": {
     en: "No pulls match this filter yet.",
     es: "Aún no hay tiradas que coincidan con este filtro.",

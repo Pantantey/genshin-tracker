@@ -13,6 +13,9 @@ import type { TranslationKey } from "@/lib/i18n";
 
 type RarityFilter = "all" | 4 | 5;
 
+/** Badge decorating the last 5-star circle: lost 50/50 or won back-to-back. */
+type CircleBadge = "lost" | "lucky";
+
 const PAGE_SIZE = 30;
 
 export interface PityCircleGridProps {
@@ -50,14 +53,30 @@ export function PityCircleGrid({
   const safePage = Math.min(page, totalPages - 1);
   const paged = visible.slice(safePage * PAGE_SIZE, (safePage + 1) * PAGE_SIZE);
 
-  // Most recent 5-star of the selected banner: determines whether the current
-  // guarantee state was lost (a permanent-pool character means a lost 50/50).
-  const lastFiveStar = wishes
+  // 5-star wishes of the selected banner, newest first. The last two of them
+  // decide which badge decorates the last 5-star circle.
+  const fiveStarsNewestFirst = wishes
     .filter((wish) => wish.rarity === 5)
-    .sort((a, b) => b.timestamp.localeCompare(a.timestamp))[0];
-  const lostFiftyFifty =
-    lastFiveStar !== undefined &&
-    isStandardPoolCharacter(lastFiveStar) === "standard";
+    .sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+  const lastFiveStar = fiveStarsNewestFirst[0];
+  const previousFiveStar = fiveStarsNewestFirst[1];
+
+  // - last is a permanent-pool character (lost 50/50) → sad emoji;
+  // - last is featured right after another featured (won twice) → sparkles;
+  // - any other case (e.g. guaranteed featured after a lost 50/50) → nothing.
+  let lastBadge: CircleBadge | null = null;
+  if (lastFiveStar !== undefined) {
+    if (isStandardPoolCharacter(lastFiveStar) === "standard") {
+      lastBadge = "lost";
+    } else if (
+      isStandardPoolCharacter(lastFiveStar) === "featured" &&
+      previousFiveStar !== undefined &&
+      isStandardPoolCharacter(previousFiveStar) === "featured"
+    ) {
+      lastBadge = "lucky";
+    }
+  }
+  const badgeWishId = lastBadge !== null ? lastFiveStar.id : null;
 
   return (
     <section
@@ -102,13 +121,6 @@ export function PityCircleGrid({
         </div>
       </div>
 
-      {lastFiveStar !== undefined && lostFiftyFifty && (
-        <p className="mt-2 rounded-lg border border-borders bg-bg-cards/60 px-3 py-1.5 text-sm text-text-black">
-          {t("pull.teasePrefix")} <strong>{lastFiveStar.name}</strong>{" "}
-          {t("pull.teaseSuffix")}
-        </p>
-      )}
-
       {paged.length === 0 ? (
         <p className="mt-3 text-sm text-text-black">
           {t("pull.empty")}
@@ -122,6 +134,7 @@ export function PityCircleGrid({
               pity={
                 wish.rarity === 4 ? perWish4[wish.id] : perWish5[wish.id]
               }
+              badge={wish.id === badgeWishId ? lastBadge : null}
             />
           ))}
         </div>
@@ -154,7 +167,16 @@ export function PityCircleGrid({
   );
 }
 
-function PityCircle({ wish, pity }: { wish: Wish; pity?: number }) {
+function PityCircle({
+  wish,
+  pity,
+  badge,
+}: {
+  wish: Wish;
+  pity?: number;
+  /** Badge for this circle: "lost" (sad emoji) or "lucky" (sparkles). */
+  badge?: CircleBadge | null;
+}) {
   const { t } = useLanguage();
   const isFive = wish.rarity === 5;
   const [broken, setBroken] = useState(false);
@@ -168,6 +190,14 @@ function PityCircle({ wish, pity }: { wish: Wish; pity?: number }) {
     weaponNameKey != null
       ? t(weaponNameKey as TranslationKey)
       : capitalizeName(wish.name);
+  // Tooltip text and emoji shown on the badge, when present.
+  const badgeLabel =
+    badge === "lost"
+      ? `${t("pull.teasePrefix")} ${wish.name} ${t("pull.teaseSuffix")}`
+      : badge === "lucky"
+        ? `${t("pull.luckyPrefix")} ${wish.name}${t("pull.luckySuffix")}`
+        : "";
+  const badgeEmoji = badge === "lucky" ? "✨" : "😭";
   // Only characters open their build page; weapons stay non-clickable.
   const buildUrl =
     wish.itemType === "character" ? getCharacterBuildUrl(wish.name) : null;
@@ -207,6 +237,17 @@ function PityCircle({ wish, pity }: { wish: Wish; pity?: number }) {
       >
         {pityValue}
       </span>
+      {/* Emoji badge over the last 5-star circle (hover shows its text). */}
+      {badge && (
+        <span
+          role="img"
+          aria-label={badgeLabel}
+          title={badgeLabel}
+          className="absolute -right-1 -top-1 text-[22px]"
+        >
+          {badgeEmoji}
+        </span>
+      )}
     </div>
   );
 

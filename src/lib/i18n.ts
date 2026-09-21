@@ -276,6 +276,11 @@ export const messages = {
   "pull.title": { en: "Pull history", es: "Historial de tiradas" },
   "pull.filterLabel": { en: "Filter pulls", es: "Filtrar tiradas" },
   "pull.all": { en: "All", es: "Todas" },
+  "pull.teasePrefix": { en: "You lost the 50/50 to", es: "Perdiste el 50/50 con" },
+  "pull.teaseSuffix": {
+    en: "— but the next 5★ is guaranteed!",
+    es: "… ¡pero tu próximo 5★ está garantizado!",
+  },
   "pull.empty": {
     en: "No pulls match this filter yet.",
     es: "Aún no hay tiradas que coincidan con este filtro.",

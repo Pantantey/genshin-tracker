@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Wish } from "../domain/wish";
 import { getItemIcon, itemInitials } from "../domain/item-icons";
 import { capitalizeName } from "../domain/format";
+import { isStandardPoolCharacter } from "../domain/standard-pool";
 import { useLanguage } from "@/hooks/use-language";
 import { getCharacterBuildUrl } from "@/features/builds/domain/characters";
 import { getWeaponNameKey } from "@/features/builds/domain/build-icons";
@@ -49,6 +50,15 @@ export function PityCircleGrid({
   const safePage = Math.min(page, totalPages - 1);
   const paged = visible.slice(safePage * PAGE_SIZE, (safePage + 1) * PAGE_SIZE);
 
+  // Most recent 5-star of the selected banner: determines whether the current
+  // guarantee state was lost (a permanent-pool character means a lost 50/50).
+  const lastFiveStar = wishes
+    .filter((wish) => wish.rarity === 5)
+    .sort((a, b) => b.timestamp.localeCompare(a.timestamp))[0];
+  const lostFiftyFifty =
+    lastFiveStar !== undefined &&
+    isStandardPoolCharacter(lastFiveStar) === "standard";
+
   return (
     <section
       aria-label={t("pull.title")}
@@ -91,6 +101,13 @@ export function PityCircleGrid({
           })}
         </div>
       </div>
+
+      {lastFiveStar !== undefined && lostFiftyFifty && (
+        <p className="mt-2 rounded-lg border border-borders bg-bg-cards/60 px-3 py-1.5 text-sm text-text-black">
+          {t("pull.teasePrefix")} <strong>{lastFiveStar.name}</strong>{" "}
+          {t("pull.teaseSuffix")}
+        </p>
+      )}
 
       {paged.length === 0 ? (
         <p className="mt-3 text-sm text-text-black">

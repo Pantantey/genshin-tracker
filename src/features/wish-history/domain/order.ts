@@ -9,7 +9,9 @@ import type { Wish } from "./wish";
  *
  * Wishes pulled together share the same timestamp and the source lists them
  * newest-first, so within an equal timestamp the `id` (which increases with
- * time) decides the true order: smallest id = oldest pull.
+ * time) decides the true order: smallest id = oldest pull. That makes the
+ * newest-first sort use descending ids and the oldest-first sort ascending
+ * ids, so both are strict reverses of each other.
  */
 
 /** Ascending numeric order for string ids (length first, then lexicographic). */
@@ -21,7 +23,7 @@ function idCompareAsc(a: string, b: string): number {
 export function sortNewestFirst(wishes: Wish[]): Wish[] {
   return [...wishes].sort(
     (a, b) =>
-      b.timestamp.localeCompare(a.timestamp) || idCompareAsc(a.id, b.id)
+      b.timestamp.localeCompare(a.timestamp) || idCompareAsc(b.id, a.id)
   );
 }
 

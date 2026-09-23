@@ -7,15 +7,19 @@
  */
 export type BannerType = "character" | "weapon" | "standard";
 
-/** HoYoVerse `gacha_type` value used when building a request for a banner. */
-export const BANNER_GACHA_TYPES: Record<BannerType, string> = {
-  character: "301",
-  weapon: "302",
-  standard: "200",
+/**
+ * HoYoVerse `gacha_type` values used when building requests for a banner.
+ * The Character Event Wish now spans two API pools ("301" and "400").
+ */
+export const BANNER_GACHA_TYPES: Record<BannerType, readonly string[]> = {
+  character: ["301", "400"],
+  weapon: ["302"],
+  standard: ["200"],
 };
 
 const GACHA_TYPE_TO_BANNER: Record<string, BannerType> = {
   "301": "character",
+  "400": "character", // Character Event Wish 2 - same banner, second pool.
   "302": "weapon",
   "200": "standard",
 };

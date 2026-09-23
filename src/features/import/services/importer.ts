@@ -91,32 +91,39 @@ export async function importWishHistory(
   let duplicateCount = 0;
   let invalidCount = 0;
 
+  // Wish ids seen during the whole run, shared across API pools so records
+  // returned by several pools (overlapping windows) are not imported twice.
+  const seenThisRun = new Set<string>();
+
   // Banners are fetched sequentially with a pause between them: the endpoint
   // rate-limits, so parallel bursts cause later pages to fail.
   for (const banner of BANNER_ORDER) {
-    const result = await importBanner(
-      sourceUrl,
-      banner,
-      BANNER_GACHA_TYPES[banner],
-      existingIds,
-      onProgress
-    );
+    for (const gachaType of BANNER_GACHA_TYPES[banner]) {
+      const result = await importBanner(
+        sourceUrl,
+        banner,
+        gachaType,
+        existingIds,
+        onProgress,
+        seenThisRun
+      );
 
-    wishes.push(...result.wishes);
-    fetchedWishes.push(...result.fetchedWishes);
-    addedCount += result.addedCount;
-    alreadyCount += result.alreadyCount;
-    duplicateCount += result.duplicateCount;
-    invalidCount += result.invalidCount;
+      wishes.push(...result.wishes);
+      fetchedWishes.push(...result.fetchedWishes);
+      addedCount += result.addedCount;
+      alreadyCount += result.alreadyCount;
+      duplicateCount += result.duplicateCount;
+      invalidCount += result.invalidCount;
 
-    if (result.error) {
-      errors.push(result.error);
+      if (result.error) {
+        errors.push(result.error);
+      }
+      if (!result.returnedData && !result.error) {
+        skippedGachaTypes.push(gachaType);
+      }
+
+      await sleep(BANNER_DELAY_MS);
     }
-    if (!result.returnedData && !result.error) {
-      skippedGachaTypes.push(BANNER_GACHA_TYPES[banner]);
-    }
-
-    await sleep(BANNER_DELAY_MS);
   }
 
   return {
@@ -136,9 +143,9 @@ async function importBanner(
   banner: BannerType,
   gachaType: string,
   existingIds: ReadonlySet<string>,
-  onProgress?: ProgressListener
+  onProgress: ProgressListener | undefined,
+  seenThisRun: Set<string>
 ): Promise<BannerResult> {
-  const seenThisRun = new Set<string>();
   const wishes: Wish[] = [];
   const fetchedWishes: Wish[] = [];
   let addedCount = 0;
@@ -181,17 +188,20 @@ async function importBanner(
 
     let newInPage = 0;
     for (const raw of list) {
+      // Mark the id before normalization: an unreadable record still counts as
+      // seen, so a page of unknown gacha_type does not wedge the import.
+      if (seenThisRun.has(raw.id)) {
+        duplicateCount += 1;
+        continue;
+      }
+      seenThisRun.add(raw.id);
+      newInPage += 1;
+
       const wish = normalizeWish(raw);
       if (!wish) {
         invalidCount += 1;
         continue;
       }
-      if (seenThisRun.has(wish.id)) {
-        duplicateCount += 1;
-        continue;
-      }
-      seenThisRun.add(wish.id);
-      newInPage += 1;
       fetchedWishes.push(wish);
       if (existingIds.has(wish.id)) {
         alreadyCount += 1;
@@ -204,8 +214,8 @@ async function importBanner(
     // Advance the pagination cursor to the oldest wish of this page.
     lastId = list[list.length - 1].id;
 
-    // The server returned a page with no new wish ids: we are looping over the
-    // same recent window. Stop this banner.
+    // The server returned a page where every record was already seen in this
+    // run: it is looping over the same recent window. Stop this banner.
     if (newInPage === 0) {
       break;
     }

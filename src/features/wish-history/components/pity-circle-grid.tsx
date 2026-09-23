@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Wish } from "../domain/wish";
 import { getItemIcon, itemInitials } from "../domain/item-icons";
 import { capitalizeName } from "../domain/format";
+import { sortNewestFirst } from "../domain/order";
 import { isStandardPoolCharacter } from "../domain/standard-pool";
 import { useLanguage } from "@/hooks/use-language";
 import { getCharacterBuildUrl } from "@/features/builds/domain/characters";
@@ -48,9 +49,9 @@ export function PityCircleGrid({
     { value: 5, label: "5★" },
   ];
 
-  const visible = [...wishes]
-    .sort((a, b) => b.timestamp.localeCompare(a.timestamp))
-    .filter((wish) => filter === "all" || wish.rarity === filter);
+  const visible = sortNewestFirst(wishes).filter(
+    (wish) => filter === "all" || wish.rarity === filter
+  );
 
   const totalPages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages - 1);
@@ -58,9 +59,9 @@ export function PityCircleGrid({
 
   // 5-star wishes of the selected banner, newest first. The last two of them
   // decide which badge decorates the last 5-star circle.
-  const fiveStarsNewestFirst = wishes
-    .filter((wish) => wish.rarity === 5)
-    .sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+  const fiveStarsNewestFirst = sortNewestFirst(
+    wishes.filter((wish) => wish.rarity === 5)
+  );
   const lastFiveStar = fiveStarsNewestFirst[0];
   const previousFiveStar = fiveStarsNewestFirst[1];
 

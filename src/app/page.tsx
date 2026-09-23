@@ -71,9 +71,7 @@ export default function Home() {
     for (const wish of [...fives, ...fours]) {
       byId.set(wish.id, wish);
     }
-    return [...byId.values()].sort((a, b) =>
-      b.timestamp.localeCompare(a.timestamp)
-    );
+    return sortNewestFirst([...byId.values()]);
   }, [accountWishes, selectedBanner]);
 
   const totalPages = Math.max(1, Math.ceil(displayWishes.length / PAGE_SIZE));

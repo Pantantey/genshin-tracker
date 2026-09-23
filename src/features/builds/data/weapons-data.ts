@@ -239,13 +239,13 @@ export const WEAPONS_DATA: Record<string, WeaponData> = {
     secondaryStat: "weapons.beyond_the_chrysalis.secondaryStat",
     description: "weapons.beyond_the_chrysalis.description",
   },
-  "Hymn of the Maelstorm": {
-    name: "Hymn of the Maelstorm",
-    nameKey: "weapons.hymn_of_the_maelstorm.name",
+  "Hymn of the Maelstrom": {
+    name: "Hymn of the Maelstrom",
+    nameKey: "weapons.hymn_of_the_maelstrom.name",
     stars: 5,
-    mainStat: "weapons.hymn_of_the_maelstorm.mainStat",
-    secondaryStat: "weapons.hymn_of_the_maelstorm.secondaryStat",
-    description: "weapons.hymn_of_the_maelstorm.description",
+    mainStat: "weapons.hymn_of_the_maelstrom.mainStat",
+    secondaryStat: "weapons.hymn_of_the_maelstrom.secondaryStat",
+    description: "weapons.hymn_of_the_maelstrom.description",
   },
   "Thrilling Tales of Dragon Slayers": {
     name: "Thrilling Tales of Dragon Slayers",

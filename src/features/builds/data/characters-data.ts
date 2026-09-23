@@ -2572,7 +2572,7 @@ export const CHARACTERS_DATA: CharacterBuildData[] = [
     normalAttackLevel: "Level 1",
     elementalSkillLevel: "Level 10",
     ultimateLevel: "Level 1+",
-    weapons: ["Hymn of the Maelstorm", "Thrilling Tales of Dragon Slayers"],
+    weapons: ["Hymn of the Maelstrom", "Thrilling Tales of Dragon Slayers"],
   },
   {
     slug: "wanderer",

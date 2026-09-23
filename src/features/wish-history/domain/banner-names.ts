@@ -20,7 +20,7 @@ export const CHARACTER_FEATURED_ITEMS: string[] = [
 export const WEAPON_BANNER_NAME = "beyond_the_chrysalis";
 
 /** Weapon Event Wish — second featured weapon. */
-export const WEAPON_BANNER_NAME_2 = "hymn_of_the_maelstorm";
+export const WEAPON_BANNER_NAME_2 = "hymn_of_the_maelstrom";
 
 /** Standard Wish — slug of the currently displayed standard 5★ character. */
 export const STANDARD_BANNER_NAME = "mona";

@@ -134,9 +134,9 @@ export const messages = {
   "weapons.beyond_the_chrysalis.mainStat": { en: "CRIT DMG 44.1%", es: "DAÑO CRÍTICO 44.1%" },
   "weapons.beyond_the_chrysalis.secondaryStat": { en: "ATK 674", es: "ATQ 674" },
   "weapons.beyond_the_chrysalis.description": { en: "Each time the wielder uses their Elemental Skill or Elemental Burst, they gain one of the following effects in this order: increased CRIT DMG, Stellar Whirl, or energy regeneration.", es: "Cada vez que el portador usa la Habilidad Elemental o Definitiva gana uno de los siguientes efectos en este orden: aumenta el daño crítico, torbellino estelar o regenera energia." },
-  "weapons.hymn_of_the_maelstorm.mainStat": { en: "HP 66.2%", es: "VIDA 66.2%" },
-  "weapons.hymn_of_the_maelstorm.secondaryStat": { en: "ATK 542", es: "ATQ 542" },
-  "weapons.hymn_of_the_maelstorm.description": { en: "Improves the healing of the character equipping it, increases the active character's attack, and boosts these effects if the team triggers Stellar Reactions.", es: "Mejora la curación del personaje que lo lleva equipado, aumenta el ataque del personaje en uso y potencia estos efectos si el equipo activa Reacciones estelares." },
+  "weapons.hymn_of_the_maelstrom.mainStat": { en: "HP 66.2%", es: "VIDA 66.2%" },
+  "weapons.hymn_of_the_maelstrom.secondaryStat": { en: "ATK 542", es: "ATQ 542" },
+  "weapons.hymn_of_the_maelstrom.description": { en: "Improves the healing of the character equipping it, increases the active character's attack, and boosts these effects if the team triggers Stellar Reactions.", es: "Mejora la curación del personaje que lo lleva equipado, aumenta el ataque del personaje en uso y potencia estos efectos si el equipo activa Reacciones estelares." },
   "weapons.thrilling_Tales_of_dragon_slayers.mainStat": { en: "HP 35.2%", es: "VIDA 35.2%" },
   "weapons.thrilling_Tales_of_dragon_slayers.secondaryStat": { en: "ATK 401", es: "ATQ 401" },
   "weapons.thrilling_Tales_of_dragon_slayers.description": { en: "When switching characters, the new character's attack increases.", es: "Al cambiar de personaje, el ataque del nuevo personaje aumenta." },
@@ -169,7 +169,7 @@ export const messages = {
   "weapons.prospector's_shovel.name": { en: "Prospector's Shovel", es: "Azada Excavatesoros" },
   "weapons.ballad_of_the_fjords.name": { en: "Ballad of the Fjords", es: "Balada de los Fiordos" },
   "weapons.beyond_the_chrysalis.name": { en: "Beyond the Chrysalis", es: "Allende la Crisálida" },
-  "weapons.hymn_of_the_maelstorm.name": { en: "Hymn of the Maelstorm", es: "Himno del Vórtice" },
+  "weapons.hymn_of_the_maelstrom.name": { en: "Hymn of the Maelstrom", es: "Himno del Vórtice" },
   "weapons.thrilling_Tales_of_dragon_slayers.name": { en: "Thrilling Tales of Dragon Slayers", es: "Cuentos de Cazadores de Dragones" },
 
   // Artifacts

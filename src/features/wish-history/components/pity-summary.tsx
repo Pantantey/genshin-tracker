@@ -10,26 +10,26 @@ import {
 import { CHARACTER_BANNER_NAME } from "../domain/banner-names";
 import { WEAPON_BANNER_NAME } from "../domain/banner-names";
 import { WEAPON_BANNER_NAME_2 } from "../domain/banner-names";
-import { getWeaponBannerDisplayName } from "../domain/banner-names";
 import { getCharacterInfo } from "@/features/builds/domain/characters";
 import { getCharacterBuildUrl } from "@/features/builds/domain/characters";
 import { getElementIcon } from "@/features/builds/domain/build-icons";
 import { getWeaponTypeIcon } from "@/features/builds/domain/build-icons";
-import { getWeaponNameKey } from "@/features/builds/domain/build-icons";
 import { capitalizeName } from "../domain/format";
 import type { RarityPityResult } from "../domain/pity";
 import type { OutcomeResult } from "../domain/outcome";
 import { useLanguage } from "@/hooks/use-language";
 import type { TranslationKey } from "@/lib/i18n";
 
-/** Localized display name for a Weapon banner weapon slug. */
+/**
+ * Localized display name for a Weapon banner weapon slug.
+ * Weapon i18n keys follow the `weapons.{slug}.name` convention, so the slug
+ * maps directly to the translation key.
+ */
 function localizeWeaponBannerName(
   slug: string,
   t: (key: TranslationKey) => string
 ): string {
-  const english = getWeaponBannerDisplayName(slug);
-  const key = getWeaponNameKey(english);
-  return key ? t(key as TranslationKey) : english;
+  return t(`weapons.${slug}.name` as TranslationKey);
 }
 
 export interface PitySummaryProps {

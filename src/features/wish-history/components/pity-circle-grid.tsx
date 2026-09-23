@@ -18,6 +18,9 @@ type CircleBadge = "lost" | "lucky";
 
 const PAGE_SIZE = 30;
 
+/** Circular PNG badge over the last 5-star circle when the 50/50 was lost. */
+const LOST_BADGE_IMAGE = "/icons/wajaja.png";
+
 export interface PityCircleGridProps {
   /** Wishes of the selected banner, only 4★ and 5★. */
   wishes: Wish[];
@@ -190,14 +193,14 @@ function PityCircle({
     weaponNameKey != null
       ? t(weaponNameKey as TranslationKey)
       : capitalizeName(wish.name);
-  // Tooltip text and emoji shown on the badge, when present.
+  // Tooltip text shown on the badge, when present. The badge visual itself is
+  // the ✨ emoji (won back-to-back) or the circular wajaja.png (lost 50/50).
   const badgeLabel =
     badge === "lost"
       ? `${t("pull.teasePrefix")} ${wish.name} ${t("pull.teaseSuffix")}`
       : badge === "lucky"
         ? `${t("pull.luckyPrefix")} ${wish.name}${t("pull.luckySuffix")}`
         : "";
-  const badgeEmoji = badge === "lucky" ? "✨" : "😭";
   // Only characters open their build page; weapons stay non-clickable.
   const buildUrl =
     wish.itemType === "character" ? getCharacterBuildUrl(wish.name) : null;
@@ -237,7 +240,7 @@ function PityCircle({
       >
         {pityValue}
       </span>
-      {/* Emoji badge over the last 5-star circle (hover shows its text). */}
+      {/* Badge over the last 5-star circle (hover shows its text). */}
       {badge && (
         <span
           role="img"
@@ -245,7 +248,16 @@ function PityCircle({
           title={badgeLabel}
           className="absolute -right-1 -top-1 text-[22px]"
         >
-          {badgeEmoji}
+          {badge === "lucky" ? (
+            "🌟"
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={LOST_BADGE_IMAGE}
+              alt=""
+              className="mr-0.5 inline-block h-[24px] w-[24px] rounded-full object-cover align-[-0.125em]"
+            />
+          )}
         </span>
       )}
     </div>

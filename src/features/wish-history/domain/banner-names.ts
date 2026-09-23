@@ -8,33 +8,19 @@
  */
 
 /** Character Event Wish — slug of the currently featured 5★ character. */
-export const CHARACTER_BANNER_NAME = "ineffa";
+export const CHARACTER_BANNER_NAME = "vesna";
 
 export const CHARACTER_FEATURED_ITEMS: string[] = [
-  "aino",
-  "lan_yan",
-  "iansan",
+  "diona",
+  "faruzan",
+  "chongyun",
 ];
 
 /** Weapon Event Wish — main weapon. */
-export const WEAPON_BANNER_NAME = "fractured_halo";
+export const WEAPON_BANNER_NAME = "beyond_the_chrysalis";
 
-export const WEAPON_BANNER_NAME_2 = "bloodsoaked_ruins";
-
-/**
- * Display names for the weapons shown on the Weapon banner (slug → name).
- * Kept next to the slugs so the banner heading stays in sync when the
- * featured weapon changes.
- */
-const WEAPON_BANNER_DISPLAY_NAMES: Record<string, string> = {
-  fractured_halo: "Fractured Halo",
-  bloodsoaked_ruins: "Bloodsoaked Ruins",
-};
-
-/** Human-readable name for a Weapon banner weapon slug. */
-export function getWeaponBannerDisplayName(slug: string): string {
-  return WEAPON_BANNER_DISPLAY_NAMES[slug] ?? slug;
-}
+/** Weapon Event Wish — second featured weapon. */
+export const WEAPON_BANNER_NAME_2 = "hymn_of_the_maelstorm";
 
 /** Standard Wish — slug of the currently displayed standard 5★ character. */
 export const STANDARD_BANNER_NAME = "mona";

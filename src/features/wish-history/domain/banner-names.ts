@@ -8,19 +8,19 @@
  */
 
 /** Character Event Wish — slug of the currently featured 5★ character. */
-export const CHARACTER_BANNER_NAME = "vesna";
+export const CHARACTER_BANNER_NAME = "skirk";
 
 export const CHARACTER_FEATURED_ITEMS: string[] = [
-  "diona",
-  "faruzan",
-  "chongyun",
+  "mika",
+  "candace",
+  "dahlia",
 ];
 
 /** Weapon Event Wish — main weapon. */
-export const WEAPON_BANNER_NAME = "beyond_the_chrysalis";
+export const WEAPON_BANNER_NAME = "azurelight";
 
 /** Weapon Event Wish — second featured weapon. */
-export const WEAPON_BANNER_NAME_2 = "hymn_of_the_maelstrom";
+export const WEAPON_BANNER_NAME_2 = "symphonist_of_scents";
 
 /** Standard Wish — slug of the currently displayed standard 5★ character. */
 export const STANDARD_BANNER_NAME = "mona";
